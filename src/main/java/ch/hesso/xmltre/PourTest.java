@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class XmlTree {
+public class PourTest {
     static org.jdom2.Document document;
 
     static org.jdom2.Document read(String pathName) throws JDOMException, IOException {
