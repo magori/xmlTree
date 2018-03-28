@@ -1,4 +1,4 @@
-package ch.hesso.xmltre;
+package ch.hesso.xmltree;
 
 import org.jdom2.Document;
 import org.jdom2.output.Format;
