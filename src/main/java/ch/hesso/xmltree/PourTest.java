@@ -17,6 +17,16 @@ import java.io.IOException;
 public class PourTest {
     static org.jdom2.Document document;
 
+    static org.jdom2.Document read(File file) throws JDOMException, IOException {
+        //On crée une instance de SAXBuilder
+        SAXBuilder sxb = new SAXBuilder();
+        //On crée un nouveau document JDOM avec en argument le fichier XML
+        //Le parsing est terminé ;)
+        document = sxb.build(file);
+        return document;
+    }
+
+
     static org.jdom2.Document read(String pathName) throws JDOMException, IOException {
         //On crée une instance de SAXBuilder
         SAXBuilder sxb = new SAXBuilder();
