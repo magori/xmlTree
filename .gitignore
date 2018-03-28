@@ -93,5 +93,3 @@ atlassian-ide-plugin.xml
 .project
 .settings
 .springBeans
-
-changeLog-diff.xml
