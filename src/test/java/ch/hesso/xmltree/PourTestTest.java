@@ -5,15 +5,18 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 class PourTestTest {
 
     @Test
     void parseFile() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("exemple.xml").getFile());
-        Document document = PourTest.read(file);
+
+        String fileName = "src/test/resources/exemple.xml";
+        Path path = (Paths.get(fileName));
+        Document document = PourTest.read(path.toFile());
         XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
 
         sortie.output(document.getRootElement().getChildren().get(0).setName("DHDH"), System.out);

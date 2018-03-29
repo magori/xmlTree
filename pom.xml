@@ -10,14 +10,25 @@
 
     <properties>
         <lombok.version>1.16.20</lombok.version>
+        
         <equalsverifier.version>2.4.4</equalsverifier.version>
-
         <assertJ.version>3.9.1</assertJ.version>
         <junit.jupiter.version>5.1.0</junit.jupiter.version>
         <junit.platform.version>1.1.0</junit.platform.version>
         <javafaker.version>0.14</javafaker.version>
         <mockito-core.version>2.16.0</mockito-core.version>
+
+        <compiler.version>3.7.0</compiler.version>
+
+        <!-- encodage projet -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- compilation source et target -->
+        <source.configuration.jdk>1.8</source.configuration.jdk>
+        <target.configuration.jdk>1.8</target.configuration.jdk>
     </properties>
+
 
     <!-- ****** Gestion des dépendances ****** -->
     <dependencyManagement>
@@ -115,5 +126,22 @@
             <artifactId>mockito-core</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Maven compiler plugin
+            repo: https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin
+            doc: https://maven.apache.org/plugins/maven-compiler-plugin/index.html -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler.version}</version>
+                <configuration>
+                    <source>${source.configuration.jdk}</source>
+                    <target>${target.configuration.jdk}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
