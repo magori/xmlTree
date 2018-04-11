@@ -10,7 +10,7 @@
 
     <properties>
         <lombok.version>1.16.20</lombok.version>
-        
+
         <equalsverifier.version>2.4.4</equalsverifier.version>
         <assertJ.version>3.9.1</assertJ.version>
         <junit.jupiter.version>5.1.0</junit.jupiter.version>
