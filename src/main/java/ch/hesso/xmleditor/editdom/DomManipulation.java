@@ -1,6 +1,5 @@
 package ch.hesso.xmleditor.editdom;
 
-import ch.hesso.xmleditor.map.Node;
 import ch.hesso.xmleditor.persistence.FileManager;
 import ch.hesso.xmleditor.persistence.Persister;
 import org.jdom2.Document;
@@ -30,6 +29,11 @@ public class DomManipulation implements DomManipulater {
         document = this.parse(this.persister.load(idDocument));
     }
 
+    @Override
+    public Element getRootElement() {
+        return this.document.getRootElement();
+    }
+
     public Element editElement(String id, String newText) {
         Element element = this.findElement(id);
         element.setText(newText);
@@ -38,28 +42,6 @@ public class DomManipulation implements DomManipulater {
 
     public void saveDocument() {
         this.persister.save(this.idDocument, new XMLOutputter().outputString(document));
-    }
-
-    public Node createTree() {
-        Node node = new Node(null, this.document.getRootElement().getName(), null);
-        return this.createTree(this.document.getRootElement(), null, node);
-    }
-
-    private Node createTree(Element element, String id, Node parent) {
-        if (element.getChildren().isEmpty()) {
-            return new Node(id, element.getName(), element.getText());
-        } else {
-            for (int i = 0; i < element.getChildren().size(); i++) {
-                String newId = id + "-" + i;
-                if (id == null) {
-                    newId = i+"";
-                }
-                Node nodeParent = new Node(newId, element.getChildren().get(i).getName(), null);
-                Node nodeChild = createTree(element.getChildren().get(i), newId, nodeParent);
-                parent.getChildren().add(nodeChild);
-            }
-        }
-        return parent;
     }
 
     Document parse(String content) {
@@ -72,7 +54,6 @@ public class DomManipulation implements DomManipulater {
             throw new RuntimeException(e);
         }
     }
-
 
     Element findElement(String nodeId) {
         List<Integer> ids = Arrays.stream(nodeId.split("-"))

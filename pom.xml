@@ -9,14 +9,13 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <lombok.version>1.16.20</lombok.version>
+        <!-- Lib pour le projet -->
+        <jdom2.version>2.0.6</jdom2.version>
 
-        <equalsverifier.version>2.4.4</equalsverifier.version>
+        <!-- Lib  pour les tests -->
         <assertJ.version>3.9.1</assertJ.version>
         <junit.jupiter.version>5.1.0</junit.jupiter.version>
         <junit.platform.version>1.1.0</junit.platform.version>
-        <javafaker.version>0.14</javafaker.version>
-        <mockito-core.version>2.16.0</mockito-core.version>
 
         <compiler.version>3.7.0</compiler.version>
 
@@ -65,40 +64,11 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- Mockito
-            repo : https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>${mockito-core.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- Java Faker
-            repo: https://mvnrepository.com/artifact/com.github.javafaker/javafaker
-            doc: https://github.com/DiUS/java-faker -->
-            <dependency>
-                <groupId>com.github.javafaker</groupId>
-                <artifactId>javafaker</artifactId>
-                <version>${javafaker.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- EqualsVerifier
-                repo:https://mvnrepository.com/artifact/nl.jqno.equalsverifier/equalsverifier
-                doc:http://www.jqno.nl/equalsverifier -->
-            <dependency>
-                <groupId>nl.jqno.equalsverifier</groupId>
-                <artifactId>equalsverifier</artifactId>
-                <version>${equalsverifier.version}</version>
-                <scope>test</scope>
-            </dependency>
-
             <!-- https://mvnrepository.com/artifact/org.jdom/jdom2 -->
             <dependency>
                 <groupId>org.jdom</groupId>
                 <artifactId>jdom2</artifactId>
-                <version>2.0.6</version>
+                <version>${jdom2.version}</version>
             </dependency>
         </dependencies>
 
@@ -116,14 +86,6 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>nl.jqno.equalsverifier</groupId>
-            <artifactId>equalsverifier</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
         </dependency>
     </dependencies>
 

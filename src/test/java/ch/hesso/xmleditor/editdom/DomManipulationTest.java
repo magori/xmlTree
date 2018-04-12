@@ -1,6 +1,5 @@
 package ch.hesso.xmleditor.editdom;
 
-import ch.hesso.xmleditor.map.Node;
 import org.assertj.core.api.Assertions;
 import org.jdom2.Document;
 import org.junit.jupiter.api.Test;
@@ -29,9 +28,5 @@ class DomManipulationTest {
         Assertions.assertThat(domManipulation.editElement("1-3", "3000").getText()).isEqualTo("3000");
     }
 
-    @Test
-    void createTree() {
-        this.domManipulation.load("src/test/resources/exemple.xml");
-        Node node = domManipulation.createTree();
-    }
+
 }
