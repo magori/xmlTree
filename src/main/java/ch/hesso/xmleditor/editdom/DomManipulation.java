@@ -1,6 +1,7 @@
 package ch.hesso.xmleditor.editdom;
 
 import ch.hesso.xmleditor.map.Node;
+import ch.hesso.xmleditor.persistence.FileManager;
 import ch.hesso.xmleditor.persistence.Persister;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -14,16 +15,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DomManipulation {
+public class DomManipulation implements DomManipulater {
 
-    private final Document document;
-    private final Persister persister;
-    private final String idDocument;
+    private Persister persister;
+    private Document document;
+    private String idDocument;
 
-    DomManipulation(String idDocument, Persister persister) {
-        this.persister = persister;
+    public DomManipulation() {
+        this.persister = new FileManager();
+    }
+
+    public void load(String idDocument) {
         this.idDocument = idDocument;
-        document = this.parse(persister.load(idDocument));
+        document = this.parse(this.persister.load(idDocument));
     }
 
     public Element editElement(String id, String newText) {
@@ -41,13 +45,13 @@ public class DomManipulation {
         return this.createTree(this.document.getRootElement(), "1", node);
     }
 
-    public Node createTree(Element element, String id, Node parent) {
+    private Node createTree(Element element, String id, Node parent) {
         if (element.getChildren().isEmpty()) {
             return new Node(id, element.getName(), element.getText());
         } else {
             for (int i = 0; i < element.getChildren().size(); i++) {
-                Node nodeChild = createTree(element.getChildren().get(i), id + "-" + i, new Node(id + "-" +i, element.getChildren().get(i).getName
-                        (), null));
+                Node nodeParent = new Node(id + "-" + i, element.getChildren().get(i).getName(), null);
+                Node nodeChild = createTree(element.getChildren().get(i), id + "-" + i, nodeParent);
                 parent.getChildren().add(nodeChild);
             }
         }
