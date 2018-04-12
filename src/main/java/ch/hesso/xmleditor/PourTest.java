@@ -1,4 +1,4 @@
-package ch.hesso.xmltree;
+package ch.hesso.xmleditor;
 
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;

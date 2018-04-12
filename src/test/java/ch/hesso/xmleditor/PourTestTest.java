@@ -1,4 +1,4 @@
-package ch.hesso.xmltree;
+package ch.hesso.xmleditor;
 
 import org.jdom2.Document;
 import org.jdom2.output.Format;
@@ -22,7 +22,4 @@ class PourTestTest {
         sortie.output(document.getRootElement().getChildren().get(0).setName("DHDH"), System.out);
     }
 
-    @Test
-    void parseString() {
-    }
 }
