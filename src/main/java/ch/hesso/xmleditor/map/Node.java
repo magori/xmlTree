@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
-    private String id;
-    private String name;
-    private String text;
-    private List<Node> children;
+    private final String id;
+    private final String name;
+    private final String text;
+    private final List<Node> children;
 
     public Node(String id, String name, String text) {
         this.id = id;

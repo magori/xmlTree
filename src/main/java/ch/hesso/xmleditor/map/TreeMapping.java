@@ -5,11 +5,11 @@ import ch.hesso.xmleditor.editdom.DomManipulation;
 import org.jdom2.Element;
 
 public class TreeMapping implements Mapper {
-    DomManipulater domManipulater = new DomManipulation();
+    private final DomManipulater domManipulater = new DomManipulation();
 
     @Override
-    public void editNode(String id, String newText) {
-        this.domManipulater.editElement(id, newText);
+    public void editNode(String idDocument, String newText) {
+        this.domManipulater.editElement(idDocument, newText);
     }
 
     @Override
@@ -18,8 +18,8 @@ public class TreeMapping implements Mapper {
     }
 
     @Override
-    public Node createTree(String id) {
-        this.domManipulater.load(id);
+    public Node createTree(String idDocument) {
+        this.domManipulater.load(idDocument);
         Node node = new Node(null, domManipulater.getRootElement().getName(), null);
         return this.createTree(this.domManipulater.getRootElement(), null, node);
     }

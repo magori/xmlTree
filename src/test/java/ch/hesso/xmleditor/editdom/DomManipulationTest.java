@@ -5,9 +5,7 @@ import org.jdom2.Document;
 import org.junit.jupiter.api.Test;
 
 class DomManipulationTest {
-
-
-    private DomManipulation domManipulation = new DomManipulation();
+    private final DomManipulation domManipulation = new DomManipulation();
 
     @Test
     void parse() {
@@ -27,6 +25,4 @@ class DomManipulationTest {
         this.domManipulation.load("src/test/resources/exemple.xml");
         Assertions.assertThat(domManipulation.editElement("1-3", "3000").getText()).isEqualTo("3000");
     }
-
-
 }

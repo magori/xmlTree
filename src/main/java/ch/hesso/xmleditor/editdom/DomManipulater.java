@@ -4,12 +4,12 @@ import org.jdom2.Element;
 
 public interface DomManipulater {
     /**
-     * @param id      L'identifiant du noeud.
+     * @param idDocument      L'identifiant du noeud.
      * @param newText Le nouveau text du noeud.
      *
      * @return L'element modifié.
      */
-    Element editElement(String id, String newText);
+    Element editElement(String idDocument, String newText);
 
     /**
      * Sauvegarde le document chargé en mémoiore.

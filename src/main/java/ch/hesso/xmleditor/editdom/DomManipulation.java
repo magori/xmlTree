@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class DomManipulation implements DomManipulater {
 
-    private Persister persister;
+    private final Persister persister;
     private Document document;
     private String idDocument;
 
@@ -48,9 +48,7 @@ public class DomManipulation implements DomManipulater {
         SAXBuilder builder = new SAXBuilder();
         try {
             return builder.build(new StringReader(content));
-        } catch (JDOMException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (JDOMException | IOException e) {
             throw new RuntimeException(e);
         }
     }

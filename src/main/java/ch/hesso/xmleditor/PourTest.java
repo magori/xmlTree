@@ -14,8 +14,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class PourTest {
-    static org.jdom2.Document document;
+class PourTest {
+    private static org.jdom2.Document document;
 
     static org.jdom2.Document read(File file) throws JDOMException, IOException {
         //On crée une instance de SAXBuilder
@@ -54,6 +54,7 @@ public class PourTest {
             XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
             sortie.output(document, System.out);
         } catch (java.io.IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -65,6 +66,7 @@ public class PourTest {
             //avec en argument le nom du fichier pour effectuer la sérialisation.
             sortie.output(document, new FileOutputStream(fichier));
         } catch (java.io.IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

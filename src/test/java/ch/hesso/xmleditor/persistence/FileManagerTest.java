@@ -9,8 +9,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 class FileManagerTest {
-    private String fileName = "src/test/resources/checkWrite.xml";
-    private FileManager fileManager = new FileManager();
+    private final String fileName = "src/test/resources/checkWrite.xml";
+    private final FileManager fileManager = new FileManager();
 
     @Test
     void saveNewFile() throws IOException {
