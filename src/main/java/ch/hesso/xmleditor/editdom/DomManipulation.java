@@ -41,8 +41,8 @@ public class DomManipulation implements DomManipulater {
     }
 
     public Node createTree() {
-        Node node = new Node("1", this.document.getRootElement().getName(), null);
-        return this.createTree(this.document.getRootElement(), "1", node);
+        Node node = new Node(null, this.document.getRootElement().getName(), null);
+        return this.createTree(this.document.getRootElement(), null, node);
     }
 
     private Node createTree(Element element, String id, Node parent) {
@@ -50,8 +50,12 @@ public class DomManipulation implements DomManipulater {
             return new Node(id, element.getName(), element.getText());
         } else {
             for (int i = 0; i < element.getChildren().size(); i++) {
-                Node nodeParent = new Node(id + "-" + i, element.getChildren().get(i).getName(), null);
-                Node nodeChild = createTree(element.getChildren().get(i), id + "-" + i, nodeParent);
+                String newId = id + "-" + i;
+                if (id == null) {
+                    newId = i+"";
+                }
+                Node nodeParent = new Node(newId, element.getChildren().get(i).getName(), null);
+                Node nodeChild = createTree(element.getChildren().get(i), newId, nodeParent);
                 parent.getChildren().add(nodeChild);
             }
         }

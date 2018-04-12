@@ -3,19 +3,21 @@ package ch.hesso.xmleditor.map;
 import ch.hesso.xmleditor.editdom.DomManipulater;
 import ch.hesso.xmleditor.editdom.DomManipulation;
 
-public class TreeMapping {
-    DomManipulater domManipulater;
-    String documentId;
+public class TreeMapping implements Mapper {
+    DomManipulater domManipulater = new DomManipulation();
 
-    public TreeMapping() {
-        this.domManipulater = new DomManipulation();
+    @Override
+    public void editNode(String id, String newText) {
+        this.domManipulater.editElement(id, newText);
+    }
+    @Override
+    public void saveTree() {
+        this.domManipulater.saveDocument();
     }
 
-    void createTree(String documentId) {
-        this.documentId = documentId;
-    }
-
-    public Node createTree() {
+    @Override
+    public Node createTree(String documentId) {
+        this.domManipulater.load(documentId);
         return this.domManipulater.createTree();
     }
 }

@@ -1,5 +1,10 @@
 package ch.hesso.xmleditor.map;
 
-public class Mapper {
+public interface Mapper {
 
+    void editNode(String id, String newText);
+
+    void saveTree();
+
+    Node createTree(String documentId);
 }

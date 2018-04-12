@@ -1,6 +1,6 @@
 package ch.hesso.xmleditor.editdom;
 
-import ch.hesso.xmleditor.persistence.FileManager;
+import ch.hesso.xmleditor.map.Node;
 import org.assertj.core.api.Assertions;
 import org.jdom2.Document;
 import org.junit.jupiter.api.Test;
@@ -32,6 +32,6 @@ class DomManipulationTest {
     @Test
     void createTree() {
         this.domManipulation.load("src/test/resources/exemple.xml");
-        domManipulation.createTree();
+        Node node = domManipulation.createTree();
     }
 }
