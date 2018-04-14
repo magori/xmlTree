@@ -63,11 +63,11 @@ public class Main extends Application {
         stage.show();
     }
 
-    private TreeItem createTree(Node node, TreeItem parent) {
-        if (node.getChildren().isEmpty()) {
-            return new TreeItem(node);
+    private TreeItem createTree(Node current, TreeItem parent) {
+        if (current.getChildren().isEmpty()) {
+            return new TreeItem(current);
         } else {
-            for (Node node: node.getChildren()) {
+            for (Node node: current.getChildren()) {
                 TreeItem nodeChild = createTree(node, new TreeItem(node));
                 parent.getChildren().add(nodeChild);
             }
