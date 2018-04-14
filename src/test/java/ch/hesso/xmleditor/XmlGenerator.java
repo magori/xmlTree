@@ -39,7 +39,7 @@ class XmlGenerator {
             return element;
         }, FAKER.number().numberBetween(20, 100)));
         Persister persister = new PersisterFileImpl();
-        persister.save("src/test/resources/gen.xml", new XMLOutputter(Format.getPrettyFormat()).outputString(document));
+        persister.save("src/test/resources/generate.xml", new XMLOutputter(Format.getPrettyFormat()).outputString(document));
 
     }
 
