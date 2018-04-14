@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -21,37 +22,43 @@ class VisuInteract {
     public void load(String idDocument) {
         this.node = this.mapper.createTree(idDocument);
     }
-    
+
     public void createTableTree(Stage stage) {
         // Create a TreeTableView with model
         TreeItem<Node> rootNode = createTree(node, new TreeItem(node));
 
         TreeTableView<Node> treeTable = new TreeTableView<>(rootNode);
-        treeTable.setPrefWidth(400);
+        treeTable.setPrefWidth(600);
 
         TreeTableColumn<Node, String> nodeName = new TreeTableColumn<>("Node Name");
         nodeName.setCellValueFactory(new TreeItemPropertyValueFactory<>("name"));
+        nodeName.setPrefWidth(250);
         treeTable.getColumns().add(nodeName);
 
         TreeTableColumn<Node, String> nodeText = new TreeTableColumn<>("Node text");
         nodeText.setCellValueFactory(new TreeItemPropertyValueFactory<>("text"));
+        nodeText.setPrefWidth(300);
+        nodeText.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+
+        nodeText.setOnEditCommit((TreeTableColumn.CellEditEvent<Node, String> event) -> {
+            final Node item = event.getRowValue().getValue();
+            System.out.println("Change Item " + item + " from " + event.getOldValue() + " to new value " + event.getNewValue());
+            mapper.editNode(item.getId(), event.getNewValue());
+            mapper.saveTree();
+        });
+
         treeTable.getColumns().add(nodeText);
 
         TreeTableColumn<Node, String> nodeId = new TreeTableColumn<>("Node id");
         nodeId.setCellValueFactory(new TreeItemPropertyValueFactory<>("id"));
-        treeTable.getColumns().add(nodeId);
+        nodeId.setPrefWidth(50);
 
+        treeTable.getColumns().add(nodeId);
+        treeTable.setShowRoot(false);
+        treeTable.setEditable(true);
 
         // Create the VBox
         VBox root = new VBox(treeTable);
-
-        // Set the Style-properties of the VBox
-        root.setStyle("-fx-padding: 10;" +
-                              "-fx-border-style: solid inside;" +
-                              "-fx-border-width: 2;" +
-                              "-fx-border-insets: 5;" +
-                              "-fx-border-radius: 5;" +
-                              "-fx-border-color: blue;");
 
         // Create the Scene
         Scene scene = new Scene(root);
@@ -63,14 +70,9 @@ class VisuInteract {
         stage.show();
     }
 
-    public void editNode(String idDocument, String newText) {
-        this.mapper.editNode(idDocument, newText);
-    }
-
     public void saveTree() {
         this.mapper.saveTree();
     }
-
 
     private TreeItem createTree(Node current, TreeItem parent) {
         if (current.getChildren().isEmpty()) {

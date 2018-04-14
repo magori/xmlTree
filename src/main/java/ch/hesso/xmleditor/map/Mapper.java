@@ -8,10 +8,10 @@ public interface Mapper {
     /**
      * Permet l'édition du text de notre noeud.
      *
-     * @param idDocument          Identifiant du noeud.
-     * @param newText     Le nouveau text du noeud.
+     * @param id      Identifiant du noeud.
+     * @param newText Le nouveau text du noeud.
      */
-    void editNode(String idDocument, String newText);
+    void editNode(String id, String newText);
 
     /**
      * Sauvegarde notre document;

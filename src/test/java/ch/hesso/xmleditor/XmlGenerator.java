@@ -15,15 +15,12 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 class XmlGenerator {
-    private static final Locale LOCAL_DE_CH = new Locale("de_CH");
-
-    private static final Faker FAKER = Faker.instance(LOCAL_DE_CH);
+    private static final Faker FAKER = Faker.instance();
 
     private static <R> List<R> list(Supplier<? extends R> supplier, int size) {
         return IntStream.range(0, size).mapToObj(i -> supplier.get()).collect(Collectors.toList());
@@ -35,12 +32,11 @@ class XmlGenerator {
         document.getRootElement().addContent(list(() -> {
             Element element = new Element("company");
             element.setText(FAKER.company().name());
-            element.setContent(list(this::createStaffElement, FAKER.number().numberBetween(10, 100)));
+            element.setContent(list(this::createStaffElement, FAKER.number().numberBetween(5, 15)));
             return element;
-        }, FAKER.number().numberBetween(20, 100)));
+        }, FAKER.number().numberBetween(5, 20)));
         Persister persister = new PersisterFileImpl();
         persister.save("src/test/resources/generate.xml", new XMLOutputter(Format.getPrettyFormat()).outputString(document));
-
     }
 
     private Element createStaffElement() {

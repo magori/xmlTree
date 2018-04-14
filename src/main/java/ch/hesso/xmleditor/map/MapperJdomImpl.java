@@ -15,8 +15,8 @@ public class MapperJdomImpl implements Mapper {
     }
 
     @Override
-    public void editNode(String idDocument, String newText) {
-        this.domManipulater.editElement(idDocument, newText);
+    public void editNode(String id, String newText) {
+        this.domManipulater.editElement(id, newText);
     }
 
     @Override

@@ -11,12 +11,12 @@ public interface DomManipulater {
     Element getRootElement();
 
     /**
-     * @param idDocument L'identifiant du noeud.
+     * @param id L'identifiant du noeud.
      * @param newText    Le nouveau text du noeud.
      *
      * @return L'element modifié.
      */
-    Element editElement(String idDocument, String newText);
+    Element editElement(String id, String newText);
 
     /**
      * Sauvegarde le document chargé en mémoiore.
