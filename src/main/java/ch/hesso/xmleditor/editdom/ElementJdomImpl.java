@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 class ElementJdomImpl implements Element {
 
-    private org.jdom2.Element jdomElemnt;
+    private final org.jdom2.Element jdomElemnt;
 
     public ElementJdomImpl(org.jdom2.Element jdomElemnt) {
         this.jdomElemnt = jdomElemnt;
