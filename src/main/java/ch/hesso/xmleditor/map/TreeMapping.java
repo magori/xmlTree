@@ -2,7 +2,7 @@ package ch.hesso.xmleditor.map;
 
 import ch.hesso.xmleditor.editdom.DomManipulater;
 import ch.hesso.xmleditor.editdom.DomManipulation;
-import org.jdom2.Element;
+import ch.hesso.xmleditor.editdom.Element;
 
 public class TreeMapping implements Mapper {
     private final DomManipulater domManipulater = new DomManipulation();
@@ -40,5 +40,4 @@ public class TreeMapping implements Mapper {
         }
         return parent;
     }
-
 }

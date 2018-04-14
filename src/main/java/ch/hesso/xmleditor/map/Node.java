@@ -39,6 +39,10 @@ public class Node {
         return children;
     }
 
+    public boolean hasChildre() {
+        return !this.getChildren().isEmpty();
+    }
+
     @Override
     public String toString() {
         return "Node{" +

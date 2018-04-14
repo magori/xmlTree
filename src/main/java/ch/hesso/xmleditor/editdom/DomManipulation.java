@@ -3,7 +3,6 @@ package ch.hesso.xmleditor.editdom;
 import ch.hesso.xmleditor.persistence.FileManager;
 import ch.hesso.xmleditor.persistence.Persister;
 import org.jdom2.Document;
-import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.XMLOutputter;
@@ -31,13 +30,13 @@ public class DomManipulation implements DomManipulater {
 
     @Override
     public Element getRootElement() {
-        return this.document.getRootElement();
+        return new ElementJdomImpl(this.document.getRootElement());
     }
 
     public Element editElement(String id, String newText) {
-        Element element = this.findElement(id);
+        org.jdom2.Element element = this.findElement(id);
         element.setText(newText);
-        return element;
+        return new ElementJdomImpl(element);
     }
 
     public void saveDocument() {
@@ -53,12 +52,12 @@ public class DomManipulation implements DomManipulater {
         }
     }
 
-    Element findElement(String nodeId) {
+    org.jdom2.Element findElement(String nodeId) {
         List<Integer> ids = Arrays.stream(nodeId.split("-"))
                                   .map(Integer::valueOf)
                                   .collect(Collectors.toList());
 
-        List<Element> elements = document.getRootElement().getChildren();
+        List<org.jdom2.Element> elements = document.getRootElement().getChildren();
         for (int i = 0; i < (ids.size() - 1); i++) {
             elements = elements.get(ids.get(i)).getChildren();
         }
