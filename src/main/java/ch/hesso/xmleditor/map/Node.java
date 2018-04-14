@@ -16,21 +16,16 @@ public class Node {
         this.children = new ArrayList<>();
     }
 
-    public Node(String id, String name, String text, List<Node> children) {
-        this.id = id;
-        this.name = name;
-        this.text = text;
-        this.children = children;
-    }
-
-    public String getId() {
+     public String getId() {
         return id;
     }
 
+    @SuppressWarnings("unused")
     public String getName() {
         return name;
     }
 
+    @SuppressWarnings("unused")
     public String getText() {
         return text;
     }
