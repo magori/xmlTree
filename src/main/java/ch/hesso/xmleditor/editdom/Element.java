@@ -8,18 +8,21 @@ import java.util.List;
 public interface Element {
     /**
      * Doit retourner tout les enfants du noeud courrant.
+     *
      * @return Les enfants du noeud.
      */
     List<Element> getChildren();
 
     /**
      * Retourne le text du noeud courant.
+     *
      * @return le text du noeud.
      */
     String getText();
 
     /**
      * Retourne le nom du tag du noeud.
+     *
      * @return le nom tu tag.
      */
     String getName();

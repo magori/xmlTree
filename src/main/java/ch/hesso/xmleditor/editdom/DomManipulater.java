@@ -11,8 +11,8 @@ public interface DomManipulater {
     Element getRootElement();
 
     /**
-     * @param id L'identifiant du noeud.
-     * @param newText    Le nouveau text du noeud.
+     * @param id      L'identifiant du noeud.
+     * @param newText Le nouveau text du noeud.
      *
      * @return L'element modifié.
      */

@@ -16,7 +16,7 @@ public class Node {
         this.children = new ArrayList<>();
     }
 
-     public String getId() {
+    public String getId() {
         return id;
     }
 
