@@ -63,7 +63,7 @@ class VisuInteract {
         // Add the Scene to the Stage
         stage.setScene(scene);
         // Set the Title
-        stage.setTitle("A simple TreeTableView");
+        stage.setTitle("Xml Editor");
         // Display the Stage
         stage.show();
     }
