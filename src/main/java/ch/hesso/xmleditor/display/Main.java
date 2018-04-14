@@ -21,6 +21,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        // Create a TreeTableView with model
         Node node = this.mapper.createTree("src/test/resources/exemple.xml");
 
         TreeItem<Node> rootNode = createTree(node, new TreeItem(node));
@@ -62,11 +63,11 @@ public class Main extends Application {
         stage.show();
     }
 
-    private TreeItem createTree(Node currenz, TreeItem parent) {
-        if (currenz.getChildren().isEmpty()) {
-            return new TreeItem(currenz);
+    private TreeItem createTree(Node node, TreeItem parent) {
+        if (node.getChildren().isEmpty()) {
+            return new TreeItem(node);
         } else {
-            for (Node node: currenz.getChildren()) {
+            for (Node node: node.getChildren()) {
                 TreeItem nodeChild = createTree(node, new TreeItem(node));
                 parent.getChildren().add(nodeChild);
             }
