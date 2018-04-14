@@ -1,11 +1,17 @@
 package ch.hesso.xmleditor.map;
 
 import ch.hesso.xmleditor.editdom.DomManipulater;
-import ch.hesso.xmleditor.editdom.DomManipulation;
 import ch.hesso.xmleditor.editdom.Element;
 
-public class MapperImpl implements Mapper {
-    private final DomManipulater domManipulater = new DomManipulation();
+import javax.inject.Inject;
+
+public class MapperJdomImpl implements Mapper {
+    private final DomManipulater domManipulater;
+
+    @Inject
+    public MapperJdomImpl(DomManipulater domManipulater) {
+        this.domManipulater = domManipulater;
+    }
 
     @Override
     public void editNode(String idDocument, String newText) {

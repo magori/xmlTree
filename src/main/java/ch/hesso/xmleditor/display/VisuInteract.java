@@ -1,7 +1,6 @@
 package ch.hesso.xmleditor.display;
 
 import ch.hesso.xmleditor.map.Mapper;
-import ch.hesso.xmleditor.map.MapperImpl;
 import ch.hesso.xmleditor.map.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
@@ -11,11 +10,14 @@ import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import javax.inject.Inject;
+
 class VisuInteract {
-    private final Mapper mapper = new MapperImpl();
+    @Inject
+    private Mapper mapper;
     private Node node;
 
-    public VisuInteract(String idDocument) {
+    public void load(String idDocument) {
         this.node = this.mapper.createTree(idDocument);
     }
 

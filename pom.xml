@@ -11,11 +11,13 @@
     <properties>
         <!-- Lib pour le projet -->
         <jdom2.version>2.0.6</jdom2.version>
+        <guice.version>4.2.0</guice.version>
 
         <!-- Lib  pour les tests -->
         <assertJ.version>3.9.1</assertJ.version>
         <junit.jupiter.version>5.1.0</junit.jupiter.version>
         <junit.platform.version>1.1.0</junit.platform.version>
+        <javafaker.version>0.14</javafaker.version>
 
         <compiler.version>3.7.0</compiler.version>
 
@@ -64,6 +66,23 @@
                 <scope>test</scope>
             </dependency>
 
+            <!-- Java Faker
+            repo: https://mvnrepository.com/artifact/com.github.javafaker/javafaker
+            doc: https://github.com/DiUS/java-faker -->
+            <dependency>
+                <groupId>com.github.javafaker</groupId>
+                <artifactId>javafaker</artifactId>
+                <version>${javafaker.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.google.inject/guice -->
+            <dependency>
+                <groupId>com.google.inject</groupId>
+                <artifactId>guice</artifactId>
+                <version>${guice.version}</version>
+            </dependency>
+
             <!-- https://mvnrepository.com/artifact/org.jdom/jdom2 -->
             <dependency>
                 <groupId>org.jdom</groupId>
@@ -76,9 +95,15 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.jdom</groupId>
             <artifactId>jdom2</artifactId>
         </dependency>
+
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>

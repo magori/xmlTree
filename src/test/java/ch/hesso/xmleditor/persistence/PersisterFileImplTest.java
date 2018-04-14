@@ -8,9 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-class FileManagerTest {
+class PersisterFileImplTest {
     private final String fileName = "src/test/resources/checkWrite.xml";
-    private final FileManager fileManager = new FileManager();
+    private final PersisterFileImpl persisterFileImpl = new PersisterFileImpl();
 
     @Test
     void saveNewFile() throws IOException {
@@ -24,7 +24,7 @@ class FileManagerTest {
                 "        <salary>100000</salary>\n" +
                 "    </staff>\n" +
                 "</company>";
-        fileManager.save(fileName, content);
+        persisterFileImpl.save(fileName, content);
         Assertions.assertThat(new String(Files.readAllBytes(path))).isEqualTo(content);
         Files.delete(path);
     }
@@ -32,16 +32,16 @@ class FileManagerTest {
     @Test
     void saveOldFile() throws IOException {
         Path path = (Paths.get(fileName));
-        fileManager.save(fileName, "test");
-        fileManager.save(fileName, "test2");
+        persisterFileImpl.save(fileName, "test");
+        persisterFileImpl.save(fileName, "test2");
         Assertions.assertThat(new String(Files.readAllBytes(path))).isEqualTo("test2");
         Files.delete(path);
     }
 
     @Test
     void loadFile() throws IOException {
-        fileManager.save(fileName, "test");
-        Assertions.assertThat(fileManager.load(fileName)).isEqualTo("test");
+        persisterFileImpl.save(fileName, "test");
+        Assertions.assertThat(persisterFileImpl.load(fileName)).isEqualTo("test");
         Path path = (Paths.get(fileName));
         Files.delete(path);
     }

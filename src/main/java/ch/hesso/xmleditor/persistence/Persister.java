@@ -1,7 +1,7 @@
 package ch.hesso.xmleditor.persistence;
 
 /**
- * Pour gérer la persistances des fichiers xml.
+ * Pour gérer la persistances des fichiers xml
  */
 public interface Persister {
     /**

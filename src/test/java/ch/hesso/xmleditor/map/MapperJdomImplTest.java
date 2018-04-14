@@ -1,10 +1,12 @@
 package ch.hesso.xmleditor.map;
 
+import ch.hesso.xmleditor.editdom.DomManipulaterJdomImpl;
+import ch.hesso.xmleditor.persistence.PersisterFileImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class MapperImplTest {
-    private final MapperImpl treeMapping = new MapperImpl();
+class MapperJdomImplTest {
+    private final MapperJdomImpl treeMapping = new MapperJdomImpl(new DomManipulaterJdomImpl(new PersisterFileImpl()));
 
     @Test
     void createTree() {

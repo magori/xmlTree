@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
-public class FileManager implements Persister {
+public class PersisterFileImpl implements Persister {
     public void save(String fileName, String content) {
         Path newFilePath = Paths.get(fileName);
         try {

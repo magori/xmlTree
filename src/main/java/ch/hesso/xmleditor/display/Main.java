@@ -1,5 +1,7 @@
 package ch.hesso.xmleditor.display;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -11,6 +13,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        new VisuInteract("src/test/resources/exemple.xml").createTableTree(stage);
+        final Injector injector = Guice.createInjector(new XmlEditorManagerModuleGuice());
+        final VisuInteract visuInteract = injector.getInstance(VisuInteract.class);
+        visuInteract.load("src/test/resources/exemple.xml");
+        visuInteract.createTableTree(stage);
     }
 }

@@ -1,26 +1,27 @@
 package ch.hesso.xmleditor.editdom;
 
-import ch.hesso.xmleditor.persistence.FileManager;
 import ch.hesso.xmleditor.persistence.Persister;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.XMLOutputter;
 
+import javax.inject.Inject;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DomManipulation implements DomManipulater {
+public class DomManipulaterJdomImpl implements DomManipulater {
 
     private final Persister persister;
     private Document document;
     private String idDocument;
 
-    public DomManipulation() {
-        this.persister = new FileManager();
+    @Inject
+    public DomManipulaterJdomImpl(Persister persister) {
+        this.persister = persister;
     }
 
     public void load(String idDocument) {
