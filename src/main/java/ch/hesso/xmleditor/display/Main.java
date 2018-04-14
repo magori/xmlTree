@@ -15,7 +15,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         final Injector injector = Guice.createInjector(new XmlEditorManagerModuleGuice());
         final VisuInteract visuInteract = injector.getInstance(VisuInteract.class);
-        visuInteract.load("src/test/resources/exemple.xml");
+        visuInteract.load("src/test/resources/gen.xml");
         visuInteract.createTableTree(stage);
     }
 }

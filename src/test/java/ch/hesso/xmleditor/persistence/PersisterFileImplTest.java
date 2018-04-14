@@ -45,4 +45,5 @@ class PersisterFileImplTest {
         Path path = (Paths.get(fileName));
         Files.delete(path);
     }
+
 }

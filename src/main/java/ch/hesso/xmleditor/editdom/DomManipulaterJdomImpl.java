@@ -4,6 +4,7 @@ import ch.hesso.xmleditor.persistence.Persister;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 import javax.inject.Inject;
@@ -41,7 +42,7 @@ public class DomManipulaterJdomImpl implements DomManipulater {
     }
 
     public void saveDocument() {
-        this.persister.save(this.idDocument, new XMLOutputter().outputString(document));
+        this.persister.save(this.idDocument, new XMLOutputter(Format.getPrettyFormat()).outputString(document));
     }
 
     Document parse(String content) {
