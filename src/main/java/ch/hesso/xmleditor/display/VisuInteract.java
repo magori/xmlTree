@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import javax.inject.Inject;
 
+@SuppressWarnings({"ALL", "unchecked"})
 class VisuInteract {
     @Inject
     private Mapper mapper;
@@ -20,7 +21,7 @@ class VisuInteract {
     public void load(String idDocument) {
         this.node = this.mapper.createTree(idDocument);
     }
-
+    
     public void createTableTree(Stage stage) {
         // Create a TreeTableView with model
         TreeItem<Node> rootNode = createTree(node, new TreeItem(node));

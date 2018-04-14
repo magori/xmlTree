@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class XmlGenerator {
+class XmlGenerator {
     private static final Locale LOCAL_DE_CH = new Locale("de_CH");
 
     private static final Faker FAKER = Faker.instance(LOCAL_DE_CH);
@@ -30,7 +30,7 @@ public class XmlGenerator {
     }
 
     @Test
-    public void generateXml() {
+    void generateXml() {
         Document document = this.createBaseElement();
         document.getRootElement().addContent(list(() -> {
             Element element = new Element("company");
