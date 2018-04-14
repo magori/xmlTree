@@ -1,11 +1,14 @@
 package ch.hesso.xmleditor.persistence;
 
+
+import javax.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
+@Singleton
 public class PersisterFileImpl implements Persister {
     public void save(String fileName, String content) {
         Path newFilePath = Paths.get(fileName);
