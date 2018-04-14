@@ -32,8 +32,7 @@ class XmlGenerator {
         document.getRootElement().addContent(list(() -> {
             Element element = new Element("company");
             element.setText(FAKER.company().name());
-            element.setContent(list(this::createStaffElement, FAKER.number().numberBetween(5, 15)));
-            return element;
+            return element.setContent(list(this::createStaffElement, FAKER.number().numberBetween(5, 15)));
         }, FAKER.number().numberBetween(5, 20)));
         Persister persister = new PersisterFileImpl();
         persister.save("src/test/resources/generate.xml", new XMLOutputter(Format.getPrettyFormat()).outputString(document));
