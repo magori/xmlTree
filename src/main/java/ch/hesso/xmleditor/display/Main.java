@@ -1,8 +1,8 @@
 package ch.hesso.xmleditor.display;
 
 import ch.hesso.xmleditor.map.Mapper;
+import ch.hesso.xmleditor.map.MapperImpl;
 import ch.hesso.xmleditor.map.Node;
-import ch.hesso.xmleditor.map.TreeMapping;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    private Mapper mapper = new TreeMapping();
+    private Mapper mapper = new MapperImpl();
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -67,7 +67,7 @@ public class Main extends Application {
         if (current.getChildren().isEmpty()) {
             return new TreeItem(current);
         } else {
-            for (Node node: current.getChildren()) {
+            for (Node node : current.getChildren()) {
                 TreeItem nodeChild = createTree(node, new TreeItem(node));
                 parent.getChildren().add(nodeChild);
             }

@@ -1,5 +1,8 @@
 package ch.hesso.xmleditor.map;
 
+/**
+ * Permet de faire le mapping des elements(nods).
+ */
 public interface Mapper {
 
     /**

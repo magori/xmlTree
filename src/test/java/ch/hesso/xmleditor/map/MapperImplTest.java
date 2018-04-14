@@ -3,8 +3,8 @@ package ch.hesso.xmleditor.map;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class TreeMappingTest {
-    private final TreeMapping treeMapping = new TreeMapping();
+class MapperImplTest {
+    private final MapperImpl treeMapping = new MapperImpl();
 
     @Test
     void createTree() {

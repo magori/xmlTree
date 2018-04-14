@@ -4,7 +4,7 @@ import ch.hesso.xmleditor.editdom.DomManipulater;
 import ch.hesso.xmleditor.editdom.DomManipulation;
 import ch.hesso.xmleditor.editdom.Element;
 
-public class TreeMapping implements Mapper {
+public class MapperImpl implements Mapper {
     private final DomManipulater domManipulater = new DomManipulation();
 
     @Override
