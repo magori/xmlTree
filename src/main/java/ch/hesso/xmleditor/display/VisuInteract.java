@@ -37,23 +37,21 @@ class VisuInteract {
 
         TreeTableColumn<Node, String> nodeText = new TreeTableColumn<>("Node text");
         nodeText.setCellValueFactory(new TreeItemPropertyValueFactory<>("text"));
-        nodeText.setPrefWidth(300);
         nodeText.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-
+        nodeText.setPrefWidth(300);
         nodeText.setOnEditCommit((TreeTableColumn.CellEditEvent<Node, String> event) -> {
             final Node item = event.getRowValue().getValue();
             System.out.println("Change Item " + item + " from " + event.getOldValue() + " to new value " + event.getNewValue());
             mapper.editNode(item.getId(), event.getNewValue());
             mapper.saveTree();
         });
-
         treeTable.getColumns().add(nodeText);
 
         TreeTableColumn<Node, String> nodeId = new TreeTableColumn<>("Node id");
         nodeId.setCellValueFactory(new TreeItemPropertyValueFactory<>("id"));
         nodeId.setPrefWidth(50);
-
         treeTable.getColumns().add(nodeId);
+
         treeTable.setShowRoot(false);
         treeTable.setEditable(true);
 
