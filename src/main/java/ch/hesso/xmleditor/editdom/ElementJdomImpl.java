@@ -3,7 +3,7 @@ package ch.hesso.xmleditor.editdom;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class ElementJdomImpl implements Element {
+public class ElementJdomImpl implements Element {
 
     private final org.jdom2.Element jdomElemnt;
 
@@ -25,5 +25,4 @@ class ElementJdomImpl implements Element {
     public String getName() {
         return this.jdomElemnt.getName();
     }
-
 }
