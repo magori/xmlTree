@@ -6,7 +6,7 @@ import com.google.inject.Injector;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class Main extends Application{
+public class XmlEditor extends Application{
 
 	
     public static void main(String[] args) {

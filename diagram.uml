@@ -3,118 +3,120 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="0.0" y="158.0">ch.hesso.xmleditor.display.VisuInteract</node>
-    <node x="572.2901960784312" y="79.0">ch.hesso.xmleditor.persistence.Persister</node>
-    <node x="67.45833333333334" y="79.0">ch.hesso.xmleditor.map.Mapper</node>
-    <node x="131.47696078431363" y="158.0">ch.hesso.xmleditor.map.MapperJdomImpl</node>
-    <node x="17.5" y="237.0">ch.hesso.xmleditor.display.Main</node>
-    <node x="404.36323529411754" y="158.0">ch.hesso.xmleditor.editdom.DomManipulaterJdomImpl</node>
-    <node x="363.29313725490186" y="79.0">ch.hesso.xmleditor.editdom.ElementJdomImpl</node>
-    <node x="205.29313725490186" y="79.0">ch.hesso.xmleditor.editdom.DomManipulater</node>
-    <node x="79.2931372549019" y="0.0">ch.hesso.xmleditor.map.Node</node>
-    <node x="615.3632352941175" y="158.0">ch.hesso.xmleditor.persistence.PersisterFileImpl</node>
-    <node x="353.79313725490186" y="0.0">ch.hesso.xmleditor.editdom.Element</node>
+    <node x="631.7377450980392" y="200.0">ch.hesso.xmleditor.editdom.ElementJdomImpl</node>
+    <node x="0.0" y="389.0">ch.hesso.xmleditor.display.VisuInteract</node>
+    <node x="904.021568627451" y="211.0">ch.hesso.xmleditor.persistence.Persister</node>
+    <node x="94.73774509803923" y="200.0">ch.hesso.xmleditor.map.Mapper</node>
+    <node x="357.7377450980392" y="189.0">ch.hesso.xmleditor.editdom.DomManipulater</node>
+    <node x="102.23774509803923" y="0.0">ch.hesso.xmleditor.map.Node</node>
+    <node x="251.47647058823537" y="367.0">ch.hesso.xmleditor.map.MapperJdomImpl</node>
+    <node x="1004.078431372549" y="378.0">ch.hesso.xmleditor.persistence.PersisterFileImpl</node>
+    <node x="730.078431372549" y="356.0">ch.hesso.xmleditor.editdom.DomManipulaterJdomImpl</node>
+    <node x="7.0" y="523.0">ch.hesso.xmleditor.display.Main</node>
+    <node x="576.9877450980392" y="22.0">ch.hesso.xmleditor.editdom.Element</node>
   </nodes>
   <notes />
   <edges>
     <edge source="ch.hesso.xmleditor.persistence.PersisterFileImpl" target="ch.hesso.xmleditor.persistence.Persister">
-      <point x="0.0" y="-14.5" />
-      <point x="682.3632352941175" y="138.0" />
-      <point x="648.9568627450979" y="138.0" />
-      <point x="30.66666666666663" y="14.5" />
-    </edge>
-    <edge source="ch.hesso.xmleditor.display.VisuInteract" target="ch.hesso.xmleditor.map.Node">
-      <point x="-36.66666666666666" y="-14.5" />
-      <point x="18.333333333333343" y="138.0" />
-      <point x="32.64362745098032" y="138.0" />
-      <point x="32.64362745098032" y="49.0" />
-      <point x="86.99313725490191" y="49.0" />
-      <point x="-30.799999999999983" y="14.5" />
-    </edge>
-    <edge source="ch.hesso.xmleditor.editdom.DomManipulaterJdomImpl" target="ch.hesso.xmleditor.editdom.Element">
-      <point x="5.6843418860808015E-14" y="-14.5" />
-      <point x="499.8632352941176" y="138.0" />
-      <point x="517.7931372549019" y="138.0" />
-      <point x="517.7931372549019" y="49.0" />
-      <point x="435.69313725490184" y="49.0" />
-      <point x="36.39999999999998" y="14.5" />
-    </edge>
-    <edge source="ch.hesso.xmleditor.map.Mapper" target="ch.hesso.xmleditor.map.Node">
-      <point x="0.0" y="-14.5" />
-      <point x="111.95833333333334" y="59.0" />
-      <point x="117.7931372549019" y="59.0" />
-      <point x="0.0" y="14.5" />
-    </edge>
-    <edge source="ch.hesso.xmleditor.editdom.DomManipulaterJdomImpl" target="ch.hesso.xmleditor.editdom.ElementJdomImpl">
-      <point x="-38.19999999999993" y="-14.5" />
-      <point x="461.6632352941176" y="138.0" />
-      <point x="435.29313725490186" y="138.0" />
-      <point x="0.0" y="14.5" />
-    </edge>
-    <edge source="ch.hesso.xmleditor.display.Main" target="ch.hesso.xmleditor.display.VisuInteract">
-      <point x="0.0" y="-14.5" />
-      <point x="0.0" y="14.5" />
-    </edge>
-    <edge source="ch.hesso.xmleditor.editdom.DomManipulater" target="ch.hesso.xmleditor.editdom.Element">
-      <point x="0.0" y="-14.5" />
-      <point x="274.29313725490186" y="59.0" />
-      <point x="329.0931372549019" y="78.0" />
-      <point x="-18.19999999999999" y="14.5" />
+      <point x="0.0" y="-36.5" />
+      <point x="1101.078431372549" y="336.0" />
+      <point x="1065.6882352941177" y="336.0" />
+      <point x="64.66666666666674" y="36.5" />
     </edge>
     <edge source="ch.hesso.xmleditor.map.MapperJdomImpl" target="ch.hesso.xmleditor.map.Node">
-      <point x="-11.833333333333343" y="-14.5" />
-      <point x="190.6436274509803" y="138.0" />
-      <point x="183.79313725490186" y="138.0" />
-      <point x="183.79313725490186" y="49.0" />
-      <point x="148.59313725490188" y="49.0" />
-      <point x="30.799999999999983" y="14.5" />
+      <point x="-18.33333333333337" y="-47.5" />
+      <point x="343.143137254902" y="336.0" />
+      <point x="336.2377450980392" y="336.0" />
+      <point x="336.2377450980392" y="159.0" />
+      <point x="286.7377450980392" y="159.0" />
+      <point x="82.0" y="69.5" />
     </edge>
     <edge source="ch.hesso.xmleditor.map.MapperJdomImpl" target="ch.hesso.xmleditor.editdom.Element">
-      <point x="11.833333333333314" y="-14.5" />
-      <point x="214.31029411764695" y="128.0" />
-      <point x="194.79313725490186" y="128.0" />
-      <point x="194.79313725490186" y="49.0" />
-      <point x="362.8931372549019" y="49.0" />
-      <point x="-36.39999999999998" y="14.5" />
+      <point x="18.333333333333314" y="-47.5" />
+      <point x="379.8098039215687" y="326.0" />
+      <point x="347.2377450980392" y="326.0" />
+      <point x="347.2377450980392" y="159.0" />
+      <point x="598.8877450980392" y="159.0" />
+      <point x="-87.60000000000002" y="47.5" />
+    </edge>
+    <edge source="ch.hesso.xmleditor.display.VisuInteract" target="ch.hesso.xmleditor.map.Node">
+      <point x="-61.0" y="-25.5" />
+      <point x="30.5" y="336.0" />
+      <point x="71.07107843137248" y="336.0" />
+      <point x="71.07107843137248" y="159.0" />
+      <point x="122.73774509803923" y="159.0" />
+      <point x="-82.0" y="69.5" />
+    </edge>
+    <edge source="ch.hesso.xmleditor.editdom.DomManipulaterJdomImpl" target="ch.hesso.xmleditor.editdom.Element">
+      <point x="0.0" y="-58.5" />
+      <point x="857.078431372549" y="336.0" />
+      <point x="861.2377450980392" y="336.0" />
+      <point x="861.2377450980392" y="159.0" />
+      <point x="774.0877450980392" y="159.0" />
+      <point x="87.60000000000002" y="47.5" />
     </edge>
     <edge source="ch.hesso.xmleditor.editdom.DomManipulaterJdomImpl" target="ch.hesso.xmleditor.editdom.DomManipulater">
-      <point x="-76.39999999999992" y="-14.5" />
-      <point x="423.4632352941176" y="138.0" />
-      <point x="320.29313725490186" y="138.0" />
-      <point x="46.0" y="14.5" />
+      <point x="-101.60000000000002" y="-58.5" />
+      <point x="755.4784313725489" y="336.0" />
+      <point x="569.4044117647059" y="336.0" />
+      <point x="84.66666666666663" y="58.5" />
+    </edge>
+    <edge source="ch.hesso.xmleditor.map.Mapper" target="ch.hesso.xmleditor.map.Node">
+      <point x="0.0" y="-47.5" />
+      <point x="0.0" y="69.5" />
     </edge>
     <edge source="ch.hesso.xmleditor.map.MapperJdomImpl" target="ch.hesso.xmleditor.editdom.DomManipulater">
-      <point x="59.166666666666686" y="-14.5" />
-      <point x="261.6436274509803" y="138.0" />
-      <point x="274.29313725490186" y="138.0" />
-      <point x="0.0" y="14.5" />
+      <point x="91.66666666666663" y="-47.5" />
+      <point x="453.143137254902" y="336.0" />
+      <point x="484.7377450980392" y="336.0" />
+      <point x="0.0" y="58.5" />
     </edge>
     <edge source="ch.hesso.xmleditor.display.VisuInteract" target="ch.hesso.xmleditor.map.Mapper">
-      <point x="36.66666666666666" y="-14.5" />
-      <point x="91.66666666666666" y="138.0" />
-      <point x="89.70833333333334" y="138.0" />
-      <point x="-22.25" y="14.5" />
+      <point x="61.0" y="-25.5" />
+      <point x="152.5" y="336.0" />
+      <point x="149.73774509803923" y="336.0" />
+      <point x="-55.0" y="47.5" />
+    </edge>
+    <edge source="ch.hesso.xmleditor.editdom.DomManipulaterJdomImpl" target="ch.hesso.xmleditor.editdom.ElementJdomImpl">
+      <point x="-50.799999999999955" y="-58.5" />
+      <point x="806.278431372549" y="326.0" />
+      <point x="741.2377450980392" y="326.0" />
+      <point x="0.0" y="47.5" />
+    </edge>
+    <edge source="ch.hesso.xmleditor.display.Main" target="ch.hesso.xmleditor.display.VisuInteract">
+      <point x="0.0" y="-36.5" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="ch.hesso.xmleditor.editdom.DomManipulater" target="ch.hesso.xmleditor.editdom.Element">
+      <point x="0.0" y="-58.5" />
+      <point x="484.7377450980392" y="169.0" />
+      <point x="642.6877450980393" y="169.0" />
+      <point x="-43.799999999999955" y="47.5" />
     </edge>
     <edge source="ch.hesso.xmleditor.editdom.DomManipulaterJdomImpl" target="ch.hesso.xmleditor.persistence.Persister">
-      <point x="38.2000000000001" y="-14.5" />
-      <point x="538.0632352941177" y="128.0" />
-      <point x="587.6235294117646" y="128.0" />
-      <point x="-30.66666666666663" y="14.5" />
+      <point x="101.60000000000002" y="-58.5" />
+      <point x="958.678431372549" y="336.0" />
+      <point x="1001.021568627451" y="336.0" />
+      <point x="0.0" y="36.5" />
     </edge>
     <edge source="ch.hesso.xmleditor.editdom.ElementJdomImpl" target="ch.hesso.xmleditor.editdom.Element">
-      <point x="-36.0" y="-14.5" />
-      <point x="0.0" y="14.5" />
+      <point x="54.75" y="-47.5" />
+      <point x="795.9877450980392" y="169.0" />
+      <point x="730.2877450980393" y="169.0" />
+      <point x="43.80000000000007" y="47.5" />
     </edge>
     <edge source="ch.hesso.xmleditor.map.MapperJdomImpl" target="ch.hesso.xmleditor.map.Mapper">
-      <point x="-59.166666666666686" y="-14.5" />
-      <point x="143.31029411764695" y="138.0" />
-      <point x="134.20833333333334" y="138.0" />
-      <point x="22.25" y="14.5" />
+      <point x="-91.66666666666663" y="-47.5" />
+      <point x="269.80980392156874" y="336.0" />
+      <point x="259.7377450980392" y="336.0" />
+      <point x="55.0" y="47.5" />
     </edge>
   </edges>
   <settings layout="Hierarchic Group" zoom="1.0" x="375.0" y="133.0" />
   <SelectedNodes />
-  <Categories />
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
   <SCOPE>Production</SCOPE>
   <VISIBILITY>public</VISIBILITY>
 </Diagram>
