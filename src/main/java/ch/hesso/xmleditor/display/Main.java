@@ -17,10 +17,7 @@ public class Main extends Application{
 	public void start(Stage stage) {
     	final Injector injector = Guice.createInjector(new XmlEditorManagerModuleGuice());
     	final VisuInteract visuInteract = injector.getInstance(VisuInteract.class);
-
     	visuInteract.createGUI(stage);
-    	
-    	
 	}
 
 }

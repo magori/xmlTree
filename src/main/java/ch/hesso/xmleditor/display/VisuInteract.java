@@ -27,6 +27,7 @@ import com.google.inject.Injector;
 
 @SuppressWarnings({ "ALL", "unchecked" })
 public class VisuInteract {
+	
 	@Inject
 	private Mapper mapper;
 	private Node node;
@@ -107,11 +108,18 @@ public class VisuInteract {
 		});
 	}
 
-	public void load(String idDocument) {
+	/**
+	 * Load the nodes from the other layers
+	 * @param idDocument: filepath of the document
+	 */
+	private void load(String idDocument) {
 		this.node = this.mapper.createTree(idDocument);
 	}
 
-	public void createTableTree() {
+	/**
+	 * Create the visual representation of the xml file
+	 */
+	private void createTableTree() {
 
 		TreeItem<Node> rootNode = createTree(node, new TreeItem(node));
 		treeTable.setRoot(rootNode);
@@ -149,9 +157,13 @@ public class VisuInteract {
 
 	}
 
-	public void saveTree() {
+	/**
+	 * Save the modification into the file
+	 */
+	private void saveTree() {
 		this.mapper.saveTree();
 	}
+
 
 	private TreeItem createTree(Node current, TreeItem parent) {
 		if (current.getChildren().isEmpty()) {
