@@ -57,6 +57,7 @@ public class VisuInteract {
 		TreeItem<Node> rootNode = new TreeItem<Node>(node);
 		treeTable = new TreeTableView<>(rootNode);
 		treeTable.setPrefWidth(600);
+		treeTable.setPrefHeight(500);
 
 		root = new VBox();
 		root.getChildren().add(menuBar);
@@ -70,7 +71,6 @@ public class VisuInteract {
 		primStage.setTitle("Xml Editor");
 		// Display the Stage
 		primStage.show();
-
 	}
 	
 	/**
