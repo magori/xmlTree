@@ -15,5 +15,11 @@ The other files and folders are part of the source code.
 ### Run application
 
 ```
-java -jar example/XMLEditor.jar
+    java -jar example/XMLEditor.jar
+``` 
+
+### Genearte the jar
+If you need to generate the jar you can do it with maven
+```
+   mvn clean intall
 ``` 
