@@ -18,8 +18,12 @@ The other files and folders are part of the source code.
     java -jar example/XMLEditor.jar
 ``` 
 
-### Genearte the jar
+### Genearte the jar or the maven site
 If you need to generate the jar you can do it with maven
 ```
    mvn clean intall
+``` 
+For the maven site
+```
+   mvn clean intall site
 ``` 
