@@ -25,23 +25,23 @@ public class MapperJdomImpl implements Mapper {
     }
 
     @Override
-    public Node createTree(String idDocument) {
+    public NodeImpl createTree(String idDocument) {
         this.domManipulater.load(idDocument);
-        Node node = new Node(null, domManipulater.getRootElement().getName(), null);
+        NodeImpl node = new NodeImpl(null, domManipulater.getRootElement().getName(), null);
         return this.createTree(this.domManipulater.getRootElement(), null, node);
     }
 
-    private Node createTree(Element element, String id, Node parent) {
+    private NodeImpl createTree(Element element, String id, NodeImpl parent) {
         if (element.getChildren().isEmpty()) {
-            return new Node(id, element.getName(), element.getText());
+            return new NodeImpl(id, element.getName(), element.getText());
         } else {
             for (int i = 0; i < element.getChildren().size(); i++) {
                 String newId = id + "-" + i;
                 if (id == null) {
                     newId = i + "";
                 }
-                Node nodeParent = new Node(newId, element.getChildren().get(i).getName(), null);
-                Node nodeChild = createTree(element.getChildren().get(i), newId, nodeParent);
+                NodeImpl nodeParent = new NodeImpl(newId, element.getChildren().get(i).getName(), null);
+                NodeImpl nodeChild = createTree(element.getChildren().get(i), newId, nodeParent);
                 parent.getChildren().add(nodeChild);
             }
         }

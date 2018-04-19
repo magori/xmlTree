@@ -10,7 +10,7 @@ class MapperJdomImplTest {
 
     @Test
     void createTree() {
-        Node node = this.treeMapping.createTree("src/test/resources/exemple.xml");
+        NodeImpl node = this.treeMapping.createTree("src/test/resources/exemple.xml");
         Assertions.assertThat(node.getChildren().size()).isEqualTo(2);
         Assertions.assertThat(node.getChildren().get(0).getChildren().size()).isEqualTo(4);
         Assertions.assertThat(node.getChildren().get(0).getChildren().get(2).getId()).isEqualTo("0-2");
