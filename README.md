@@ -21,7 +21,7 @@ The other files and folders are part of the source code.
 ### Generate the jar or the maven site
 If you need to generate the jar you can do it with maven
 ```
-   mvn clean install
+   mvn clean install or by the plugin jfx -> mvn jfx:native
 ``` 
 For the maven site
 ```
