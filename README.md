@@ -21,9 +21,9 @@ The other files and folders are part of the source code.
 ### Generate the jar or the maven site
 If you need to generate the jar you can do it with maven
 ```
-   mvn clean intall
+   mvn clean install
 ``` 
 For the maven site
 ```
-   mvn clean intall site
+   mvn clean install site
 ``` 
