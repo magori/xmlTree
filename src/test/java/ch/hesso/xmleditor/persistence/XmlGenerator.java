@@ -1,7 +1,5 @@
-package ch.hesso.xmleditor;
+package ch.hesso.xmleditor.persistence;
 
-import ch.hesso.xmleditor.persistence.Persister;
-import ch.hesso.xmleditor.persistence.PersisterFileImpl;
 import com.github.javafaker.Faker;
 import org.jdom2.Document;
 import org.jdom2.Element;
