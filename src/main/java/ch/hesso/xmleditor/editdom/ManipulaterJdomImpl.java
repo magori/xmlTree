@@ -14,14 +14,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DomManipulaterJdomImpl implements DomManipulater {
+public class ManipulaterJdomImpl implements Manipulater {
 
     private final Persister persister;
     private Document document;
     private String idDocument;
 
     @Inject
-    public DomManipulaterJdomImpl(Persister persister) {
+    public ManipulaterJdomImpl(Persister persister) {
         this.persister = persister;
     }
 

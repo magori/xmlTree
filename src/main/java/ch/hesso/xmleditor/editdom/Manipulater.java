@@ -2,9 +2,9 @@ package ch.hesso.xmleditor.editdom;
 
 
 /**
- * Permet de manipuler le dom;
+ * Permet de manipuler le document;
  */
-public interface DomManipulater {
+public interface Manipulater {
     /**
      * Retoure le noeud root de notre document.
      */

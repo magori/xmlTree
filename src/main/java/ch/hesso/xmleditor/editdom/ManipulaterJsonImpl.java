@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ManipulaterJsonImpl implements DomManipulater {
+public class ManipulaterJsonImpl implements Manipulater {
     private final Persister persister;
     private JsonElement element;
     private String idDocument;

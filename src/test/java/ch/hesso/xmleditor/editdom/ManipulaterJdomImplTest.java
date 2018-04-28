@@ -5,8 +5,8 @@ import org.assertj.core.api.Assertions;
 import org.jdom2.Document;
 import org.junit.jupiter.api.Test;
 
-class DomManipulaterJdomImplTest {
-    private final DomManipulaterJdomImpl domManipulation = new DomManipulaterJdomImpl(new PersisterFileImpl());
+class ManipulaterJdomImplTest {
+    private final ManipulaterJdomImpl domManipulation = new ManipulaterJdomImpl(new PersisterFileImpl());
 
     @Test
     void parse() {

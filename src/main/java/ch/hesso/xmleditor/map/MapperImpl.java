@@ -1,34 +1,34 @@
 package ch.hesso.xmleditor.map;
 
-import ch.hesso.xmleditor.editdom.DomManipulater;
+import ch.hesso.xmleditor.editdom.Manipulater;
 import ch.hesso.xmleditor.editdom.Element;
 
 import javax.inject.Inject;
 
 
-public class MapperJdomImpl implements Mapper {
-    private final DomManipulater domManipulater;
+public class MapperImpl implements Mapper {
+    private final Manipulater manipulater;
 
     @Inject
-    public MapperJdomImpl(DomManipulater domManipulater) {
-        this.domManipulater = domManipulater;
+    public MapperImpl(Manipulater manipulater) {
+        this.manipulater = manipulater;
     }
 
     @Override
     public void editNode(String id, String newText) {
-        this.domManipulater.editElement(id, newText);
+        this.manipulater.editElement(id, newText);
     }
 
     @Override
     public void saveTree() {
-        this.domManipulater.saveDocument();
+        this.manipulater.saveDocument();
     }
 
     @Override
     public NodeImpl createTree(String idDocument) {
-        this.domManipulater.load(idDocument);
-        NodeImpl node = new NodeImpl(null, domManipulater.getRootElement().getName(), null);
-        return this.createTree(this.domManipulater.getRootElement(), null, node);
+        this.manipulater.load(idDocument);
+        NodeImpl node = new NodeImpl(null, manipulater.getRootElement().getName(), null);
+        return this.createTree(this.manipulater.getRootElement(), null, node);
     }
 
     private NodeImpl createTree(Element element, String id, NodeImpl parent) {
