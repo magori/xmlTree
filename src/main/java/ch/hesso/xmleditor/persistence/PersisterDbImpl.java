@@ -63,8 +63,8 @@ public class PersisterDbImpl implements Persister, AutoCloseable {
         this.connection.close();
     }
 
-    DeleteConditionStep<FileRecord> delete(String id) {
-        DeleteConditionStep<FileRecord> fileRecord = create.delete(FILE).where(FILE.DOC_NAME.eq(id));
+    int delete(String id) {
+        int fileRecord = create.delete(FILE).where(FILE.DOC_NAME.eq(id)).execute();
         return fileRecord;
     }
 

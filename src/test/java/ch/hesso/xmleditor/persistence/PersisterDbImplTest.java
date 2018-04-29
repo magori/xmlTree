@@ -9,7 +9,7 @@ class PersisterDbImplTest {
     void save() {
         PersisterDbImpl persister = new PersisterDbImpl();
         persister.save("testnew", "{}");
-        persister.delete("testnew").execute();
+        persister.delete("testnew");
         persister.commit();
         persister.save("testnew", "{}");
         persister.save("testnew", "{}");
