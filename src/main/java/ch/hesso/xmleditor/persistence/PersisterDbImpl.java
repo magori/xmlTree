@@ -1,6 +1,7 @@
 package ch.hesso.xmleditor.persistence;
 
 import org.jooq.DSLContext;
+import org.jooq.DeleteConditionStep;
 import org.jooq.SQLDialect;
 import org.jooq.generated.tables.File;
 import org.jooq.generated.tables.records.FileRecord;
@@ -43,12 +44,9 @@ public class PersisterDbImpl implements Persister, AutoCloseable {
             fileRecord.setDocName(id);
             fileRecord.update();
         }
-        try {
-            this.connection.commit();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        commit();
     }
+
 
     @Override
     public String load(String id) {
@@ -59,8 +57,22 @@ public class PersisterDbImpl implements Persister, AutoCloseable {
         return fileRecord.getContent();
     }
 
+
     @Override
     public void close() throws SQLException {
         this.connection.close();
+    }
+
+    DeleteConditionStep<FileRecord> delete(String id) {
+        DeleteConditionStep<FileRecord> fileRecord = create.delete(FILE).where(FILE.DOC_NAME.eq(id));
+        return fileRecord;
+    }
+
+    void commit() {
+        try {
+            this.connection.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

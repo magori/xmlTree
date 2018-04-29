@@ -1,6 +1,6 @@
 package ch.hesso.xmleditor.persistence;
 
-import ch.hesso.xmleditor.editdom.ManipulaterJsonImpl;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class PersisterDbImplTest {
@@ -8,24 +8,26 @@ class PersisterDbImplTest {
     @Test
     void save() {
         PersisterDbImpl persister = new PersisterDbImpl();
-       // persister.save("monF", "{}");
-       // System.out.println(persister.load("test.file2"));
+        persister.save("testnew", "{}");
+        persister.delete("testnew").execute();
+        persister.commit();
+        persister.save("testnew", "{}");
+        persister.save("testnew", "{}");
     }
 
     @Test
     void load() {
-        PersisterDbImpl persister = new PersisterDbImpl();
-        persister.save("monF", "{\n" +
+        String json = "{\n" +
                 "  \"brand\": \"Toyota\",\n" +
                 "  \"doors\": 5,\n" +
                 "  \"options\": {\n" +
                 "    \"automatic\": \"TRUE\",\n" +
                 "    \"gps\": \"google\"\n" +
                 "  }\n" +
-                "}");
-        System.out.println(persister.load("monF"));
-        ManipulaterJsonImpl manipulaterJson = new ManipulaterJsonImpl(persister);
-        manipulaterJson.load("monF");
-        System.out.println(manipulaterJson.getRootElement().getChildren().get(1).getText());
+                "}";
+        PersisterDbImpl persister = new PersisterDbImpl();
+        persister.save("monF", json);
+        Assertions.assertThat(persister.load("monF")).isEqualTo(json);
+        Assertions.assertThat(persister.load("dkdkddk")).isNull();
     }
 }
