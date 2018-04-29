@@ -1,8 +1,8 @@
 {
-  "brand": "Toyotajkjjkj",
+  "brand": "Toyota",
   "doors": 5,
-  "test": {
-    "brand": "Toyota",
-    "doors": 5
+  "options": {
+    "automatic": "TRUE",
+    "gps": "google"
   }
 }

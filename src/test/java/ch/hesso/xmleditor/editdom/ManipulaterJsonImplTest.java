@@ -16,8 +16,8 @@ class ManipulaterJsonImplTest {
     @Test
     void editElement() {
         ManipulaterJsonImpl manipulaterJson = new ManipulaterJsonImpl(null);
-        manipulaterJson.parse("{\"brand\" : \"Toyota\", \"doors\" : 5, test:{\"brand\" : \"Toyota\", \"doors\" : 5}}");
-        Assertions.assertThat(manipulaterJson.editElement("0-1", "7").getText()).isEqualTo("7");
+        manipulaterJson.parse("{\"brand\" : \"Toyota\", \"doors\" : 5, option:{\"transmition\" : \"auto\", \"motor\" : 1.8}}");
+        Assertions.assertThat(manipulaterJson.editElement("2-1", "3").getText()).isEqualTo("3");
     }
 
 }

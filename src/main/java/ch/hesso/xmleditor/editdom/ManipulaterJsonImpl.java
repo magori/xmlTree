@@ -28,13 +28,18 @@ public class ManipulaterJsonImpl implements Manipulater {
         String[] ids = id.split("-");
         JsonObject jsonObject = element.getAsJsonObject();
         for (int i = 0; i < (ids.length - 1); i++) {
-            jsonObject = jsonObject.getAsJsonObject();
+            String property = resolveProperty(ids[i], jsonObject);
+            jsonObject = jsonObject.get(property).getAsJsonObject();
         }
-        Map<Integer, String> indexToKey = new HashMap<>();
-        jsonObject.keySet().forEach(k -> indexToKey.put(indexToKey.size(), k));
-        String property = indexToKey.get(Integer.valueOf(ids[ids.length - 1]));
+        String property = resolveProperty(ids[ids.length - 1], jsonObject);
         jsonObject.addProperty(property, newText);
         return new ElementJsonImpl(jsonObject.get(property));
+    }
+
+    private String resolveProperty(String id, JsonObject jsonObject) {
+        Map<Integer, String> indexToKey = new HashMap<>();
+        jsonObject.keySet().forEach(k -> indexToKey.put(indexToKey.size(), k));
+        return indexToKey.get(Integer.valueOf(id));
     }
 
     public void saveDocument() {

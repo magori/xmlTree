@@ -34,6 +34,54 @@
         <source.configuration.jdk>1.8</source.configuration.jdk>
         <target.configuration.jdk>1.8</target.configuration.jdk>
     </properties>
+    <profiles>
+        <profile>
+            <id>start-h2</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <version>1.4.197</version>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>h2</id>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <executable>java</executable>
+                            <mainClass>org.h2.tools.Server</mainClass>
+                            <arguments>
+                                <!-- Start also UI -->
+                                <argument>-web</argument>
+                                <!-- db is available via tcp -->
+                                <argument>-tcp</argument>
+                                <!-- local file is present in project-->
+                                <argument>-baseDir</argument>
+                                <argument>${basedir}</argument>
+                                <!-- Other computers can connect to this db -->
+                                <argument>-webAllowOthers</argument>
+                                <!--<argument>-webPort</argument>-->
+                                <!-- uncomment if you want to open h2 UI automatically -->
+                                <argument>-browser</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <activation> <activeByDefault>true</activeByDefault> </activation>
+        </profile>
+    </profiles>
 
 
     <!-- ****** Gestion des dépendances ****** -->
@@ -118,6 +166,29 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq</artifactId>
+            <version>3.10.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-meta</artifactId>
+            <version>3.10.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-codegen</artifactId>
+            <version>3.10.6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.197</version>
+            <scope>runtime</scope>
         </dependency>
 
 
@@ -286,6 +357,37 @@
                     <vendor>hesso</vendor>
                     <mainClass>ch.hesso.xmleditor.display.XmlEditor</mainClass>
                 </configuration>
+            </plugin>
+
+            <!---->
+            <plugin>
+                <groupId>org.jooq</groupId>
+                <artifactId>jooq-codegen-maven</artifactId>
+                <version>3.10.6</version>
+
+                <executions>
+                    <execution>
+                        <id>jooq-codegen</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <jdbc>
+                                <driver>org.h2.Driver</driver>
+                                <url>jdbc:h2:${basedir}\dbh2</url>
+                                <user>sa</user>
+                                <password></password>
+                            </jdbc>
+                            <generator>
+                                <database>
+                                    <name>org.jooq.util.h2.H2Database</name>
+                                    <inputSchema>PUBLIC</inputSchema>
+                                </database>
+                            </generator>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>

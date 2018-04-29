@@ -27,3 +27,12 @@ For the maven site
 ```
    mvn clean install site
 ``` 
+
+To launch the h2 web browser
+```
+   mvn exec:java@h2
+   
+   URL JDBC: jdbc:h2:dbh2
+   Nom d'utilisateur: sa
+   Mot de passe:   //vide(aucun mot de passe)
+``` 

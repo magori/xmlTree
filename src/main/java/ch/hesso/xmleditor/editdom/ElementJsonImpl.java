@@ -40,4 +40,12 @@ public class ElementJsonImpl implements Element {
     public String getName() {
         return this.name;
     }
+
+    @Override
+    public String toString() {
+        return "ElementJsonImpl{" +
+                "element=" + element +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
