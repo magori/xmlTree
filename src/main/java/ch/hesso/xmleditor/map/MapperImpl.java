@@ -1,18 +1,22 @@
 package ch.hesso.xmleditor.map;
 
-import ch.hesso.xmleditor.editdom.Manipulater;
 import ch.hesso.xmleditor.editdom.Element;
+import ch.hesso.xmleditor.editdom.Manipulater;
+import ch.hesso.xmleditor.editdom.ManipulaterProvider;
+import ch.hesso.xmleditor.editdom.ManipulaterType;
 
 import javax.inject.Inject;
 
 
 public class MapperImpl implements Mapper {
-    private final Manipulater manipulater;
+    private final ManipulaterProvider manipulaterProvider;
+    private Manipulater manipulater;
 
     @Inject
-    public MapperImpl(Manipulater manipulater) {
-        this.manipulater = manipulater;
+    public MapperImpl(ManipulaterProvider manipulaterProvider) {
+        this.manipulaterProvider = manipulaterProvider;
     }
+
 
     @Override
     public void editNode(String id, String newText) {
@@ -26,9 +30,15 @@ public class MapperImpl implements Mapper {
 
     @Override
     public NodeImpl createTree(String idDocument) {
+        this.manipulater = this.manipulaterProvider.setType(this.resolveType(idDocument)).get();
         this.manipulater.load(idDocument);
         NodeImpl node = new NodeImpl(null, manipulater.getRootElement().getName(), null);
         return this.createTree(this.manipulater.getRootElement(), null, node);
+    }
+
+    ManipulaterType resolveType(String idDocument) {
+        String[] split = idDocument.split("\\.");
+        return ManipulaterType.parse(split[split.length - 1]);
     }
 
     private NodeImpl createTree(Element element, String id, NodeImpl parent) {

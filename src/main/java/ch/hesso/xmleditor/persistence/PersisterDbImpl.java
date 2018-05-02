@@ -1,7 +1,6 @@
 package ch.hesso.xmleditor.persistence;
 
 import org.jooq.DSLContext;
-import org.jooq.DeleteConditionStep;
 import org.jooq.SQLDialect;
 import org.jooq.generated.tables.File;
 import org.jooq.generated.tables.records.FileRecord;

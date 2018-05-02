@@ -1,5 +1,6 @@
 package ch.hesso.xmleditor.display;
 
+import ch.hesso.xmleditor.editdom.Manipulater;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -16,6 +17,7 @@ public class XmlEditor extends Application{
     @Override
 	public void start(Stage stage) {
     	final Injector injector = Guice.createInjector(new XmlEditorManagerModuleGuice());
+		injector.getProvider(Manipulater.class);
     	final VisuInteract visuInteract = injector.getInstance(VisuInteract.class);
     	visuInteract.createGUI(stage);
 	}
