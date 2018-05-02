@@ -11,13 +11,16 @@ public class ManipulaterProvider implements Provider<Manipulater> {
     @Inject
     private Injector injector;
     @Inject
-    @Named("json")
     private Manipulater manipulaterJson;
     @Inject
-    @Named("xml")
     private Manipulater manipulaterXml;
-
     private ManipulaterType mapperType;
+
+    @Inject
+    public ManipulaterProvider(@Named("json") Manipulater manipulaterJson, @Named("xml") Manipulater manipulaterXml) {
+        this.manipulaterJson = manipulaterJson;
+        this.manipulaterXml = manipulaterXml;
+    }
 
     public ManipulaterProvider setType(ManipulaterType type) {
         this.mapperType = type;
