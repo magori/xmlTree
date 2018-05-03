@@ -1,6 +1,5 @@
 package ch.hesso.xmleditor.map;
 
-import ch.hesso.xmleditor.editdom.ManipulaterJsonImpl;
 import org.junit.jupiter.api.Test;
 
 class MapperJsonImplTest {

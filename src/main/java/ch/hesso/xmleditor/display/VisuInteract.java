@@ -22,8 +22,10 @@ import java.io.StringWriter;
 @SuppressWarnings({"ALL", "unchecked"})
 public class VisuInteract {
 
+
     @Inject
     private Mapper mapper;
+
     private Node node;
 
     // GUI components
@@ -34,6 +36,39 @@ public class VisuInteract {
     private TreeTableView<Node> treeTable;
     private VBox root;
 
+    private static void displayException(Thread t, Throwable ex) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Exception Dialog");
+        alert.setHeaderText("Look, an Exception Dialog");
+        alert.setContentText("Could not find file blabla.txt!");
+
+// Create expandable Exception.
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        ex.printStackTrace(pw);
+        String exceptionText = sw.toString();
+
+        Label label = new Label("The exception stacktrace was:");
+
+        TextArea textArea = new TextArea(exceptionText);
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+
+        textArea.setMaxWidth(Double.MAX_VALUE);
+        textArea.setMaxHeight(Double.MAX_VALUE);
+        GridPane.setVgrow(textArea, Priority.ALWAYS);
+        GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+        GridPane expContent = new GridPane();
+        expContent.setMaxWidth(Double.MAX_VALUE);
+        expContent.add(label, 0, 0);
+        expContent.add(textArea, 0, 1);
+
+// Set expandable Exception into the dialog pane.
+        alert.getDialogPane().setExpandableContent(expContent);
+
+        alert.showAndWait();
+    }
 
     public void createGUI(Stage stage) {
         Thread.setDefaultUncaughtExceptionHandler(VisuInteract::displayException);
@@ -67,7 +102,7 @@ public class VisuInteract {
         primStage.setTitle("Xml Editor");
         // Display the Stage
         primStage.show();
-        load("monF");
+        load("monF.json");
         createTableTree();
     }
 
@@ -163,7 +198,6 @@ public class VisuInteract {
         this.mapper.saveTree();
     }
 
-
     private TreeItem createTree(Node current, TreeItem parent) {
         if (current.getChildren().isEmpty()) {
             return new TreeItem(current);
@@ -174,39 +208,5 @@ public class VisuInteract {
             }
         }
         return parent;
-    }
-
-    private static void displayException(Thread t, Throwable ex) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Exception Dialog");
-        alert.setHeaderText("Look, an Exception Dialog");
-        alert.setContentText("Could not find file blabla.txt!");
-
-// Create expandable Exception.
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        ex.printStackTrace(pw);
-        String exceptionText = sw.toString();
-
-        Label label = new Label("The exception stacktrace was:");
-
-        TextArea textArea = new TextArea(exceptionText);
-        textArea.setEditable(false);
-        textArea.setWrapText(true);
-
-        textArea.setMaxWidth(Double.MAX_VALUE);
-        textArea.setMaxHeight(Double.MAX_VALUE);
-        GridPane.setVgrow(textArea, Priority.ALWAYS);
-        GridPane.setHgrow(textArea, Priority.ALWAYS);
-
-        GridPane expContent = new GridPane();
-        expContent.setMaxWidth(Double.MAX_VALUE);
-        expContent.add(label, 0, 0);
-        expContent.add(textArea, 0, 1);
-
-// Set expandable Exception into the dialog pane.
-        alert.getDialogPane().setExpandableContent(expContent);
-
-        alert.showAndWait();
     }
 }
