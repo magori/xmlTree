@@ -19,10 +19,10 @@ class XmlEditorManagerModuleGuice extends AbstractModule {
     @Override
     protected void configure() {
 
-        MapBinder<ManipulaterType, Manipulater> mapbinder
-                = MapBinder.newMapBinder(binder(), ManipulaterType.class, Manipulater.class);
+        MapBinder<ManipulaterType, Manipulater> mapbinder = MapBinder.newMapBinder(binder(), ManipulaterType.class, Manipulater.class);
         mapbinder.addBinding(ManipulaterType.JSON).to(ManipulaterJsonImpl.class);
         mapbinder.addBinding(ManipulaterType.XML).to(ManipulaterJdomImpl.class);
+
         bind(ManipulaterFactory.class).to(ManipulaterFactoryImpl.class);
         bind(Mapper.class).to(MapperImpl.class);
 
