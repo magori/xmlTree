@@ -25,7 +25,7 @@ class XmlEditorManagerModuleGuice extends AbstractModule {
         mapbinder.addBinding(ManipulaterType.XML).to(ManipulaterJdomImpl.class);
         bind(ManipulaterFactory.class).to(ManipulaterFactoryImpl.class);
         bind(Mapper.class).to(MapperImpl.class);
-        System.out.println(System.getProperty("jdbc.drivers"));
+
         bind(Persister.class).to(PersisterDbImpl.class);
         bind(Connection.class).toInstance(this.createConnextion("jdbc:h2:./dbh2", "sa", ""));
         bind(SQLDialect.class).toInstance(SQLDialect.valueOf("H2"));
