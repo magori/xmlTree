@@ -53,7 +53,7 @@ class XmlEditorManagerModuleGuice extends AbstractModule {
 
         Properties defaultProps = new Properties();
         try {
-            FileInputStream in = new FileInputStream("./config/config.properties");
+            FileInputStream in = new FileInputStream("./config.properties");
             defaultProps.load(in);
             // create application properties with default
             Properties applicationProps = new Properties(defaultProps);
@@ -64,17 +64,7 @@ class XmlEditorManagerModuleGuice extends AbstractModule {
             System.err.println(e);
         }
 
-        String fileName = "config.properties";
-        String roozPath = Thread.currentThread().getContextClassLoader().getResource("").getRef();
-        Properties properties = new Properties();
-        if (Files.exists(Paths.get("./" + fileName))) {
-            try {
-                properties.load(Files.newBufferedReader(Paths.get("./" + fileName)));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return properties;
+        return defaultProps;
     }
 
     private Connection createConnextion(String url, String userName, String password) {

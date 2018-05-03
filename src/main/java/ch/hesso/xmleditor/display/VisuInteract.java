@@ -102,8 +102,8 @@ public class VisuInteract {
         primStage.setTitle("Xml Editor");
         // Display the Stage
         primStage.show();
-        load("monF.json");
-        createTableTree();
+        //load("monF.json");
+        //createTableTree();
     }
 
     /**
