@@ -3,26 +3,25 @@ package ch.hesso.xmleditor.editdom;
 import com.google.inject.Injector;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Provider;
 
-public class ManipulaterProvider implements Provider<Manipulater> {
+class ManipulaterProviderOld implements Provider<Manipulater> {
 
     @Inject
     private Injector injector;
-    @Inject
+    //    @Inject
     private Manipulater manipulaterJson;
-    @Inject
+    //  @Inject
     private Manipulater manipulaterXml;
     private ManipulaterType mapperType;
 
-    @Inject
-    public ManipulaterProvider(@Named("json") Manipulater manipulaterJson, @Named("xml") Manipulater manipulaterXml) {
+    //@Inject
+/*    public ManipulaterProviderOld(@Named("json") Manipulater manipulaterJson, @Named("xml") Manipulater manipulaterXml) {
         this.manipulaterJson = manipulaterJson;
         this.manipulaterXml = manipulaterXml;
     }
-
-    public ManipulaterProvider setType(ManipulaterType type) {
+*/
+    public ManipulaterProviderOld setType(ManipulaterType type) {
         this.mapperType = type;
         return this;
     }

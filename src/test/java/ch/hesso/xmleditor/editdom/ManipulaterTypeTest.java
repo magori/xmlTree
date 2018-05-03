@@ -11,6 +11,12 @@ class ManipulaterTypeTest {
     }
 
     @Test
+    void getName() {
+        Assertions.assertThat(ManipulaterType.JSON.getName()).isEqualTo("json");
+        Assertions.assertThat(ManipulaterType.XML.getName()).isEqualTo("xml");
+    }
+
+    @Test
     void parseXml() {
         Assertions.assertThat(ManipulaterType.parse("xml")).isEqualTo(ManipulaterType.XML);
         Assertions.assertThat(ManipulaterType.parse("XML")).isEqualTo(ManipulaterType.XML);

@@ -17,7 +17,6 @@ public class ManipulaterJsonImpl implements Manipulater {
         this.persister = persister;
     }
 
-
     @Override
     public Element getRootElement() {
         return new ElementJsonImpl(element);
