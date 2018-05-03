@@ -7,10 +7,6 @@ public enum ManipulaterType {
     JSON("json"),
     XML("xml");
 
-    public String getName() {
-        return name;
-    }
-
     private String name;
 
     ManipulaterType(String name) {
@@ -26,5 +22,9 @@ public enum ManipulaterType {
         } else {
             throw new RuntimeException("This type " + type + " is not managed!");
         }
+    }
+
+    public String getName() {
+        return name;
     }
 }

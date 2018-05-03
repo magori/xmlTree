@@ -5,6 +5,7 @@ import java.util.List;
 public interface Node {
     /**
      * Permet d'avoir l'identifiant du noeud.
+     *
      * @return L'idendifiant du noeud.
      */
     String getId();
