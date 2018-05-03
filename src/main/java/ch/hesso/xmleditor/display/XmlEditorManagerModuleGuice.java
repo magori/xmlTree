@@ -25,9 +25,9 @@ class XmlEditorManagerModuleGuice extends AbstractModule {
     protected void configure() {
         Properties properties = loadConfig();
 
-        MapBinder<ManipulaterType, Manipulater> mapbinder = MapBinder.newMapBinder(binder(), ManipulaterType.class, Manipulater.class);
-        mapbinder.addBinding(ManipulaterType.JSON).to(ManipulaterJsonImpl.class);
-        mapbinder.addBinding(ManipulaterType.XML).to(ManipulaterJdomImpl.class);
+        MapBinder<ManipulaterType, Manipulater> mapBinder = MapBinder.newMapBinder(binder(), ManipulaterType.class, Manipulater.class);
+        mapBinder.addBinding(ManipulaterType.JSON).to(ManipulaterJsonImpl.class);
+        mapBinder.addBinding(ManipulaterType.XML).to(ManipulaterJdomImpl.class);
 
         bind(ManipulaterFactory.class).to(ManipulaterFactoryImpl.class);
         bind(Mapper.class).to(MapperImpl.class);
@@ -36,9 +36,9 @@ class XmlEditorManagerModuleGuice extends AbstractModule {
             String url = properties.getProperty("jdbc.url");
             String user = properties.getProperty("jdbc.user");
             String password = properties.getProperty("jdbc.password");
-            String dialiect = properties.getProperty("sql.dialect");
+            String dialect = properties.getProperty("sql.dialect");
             bind(Connection.class).toInstance(this.createConnextion(url, user, password));
-            bind(SQLDialect.class).toInstance(SQLDialect.valueOf(dialiect));
+            bind(SQLDialect.class).toInstance(SQLDialect.valueOf(dialect));
             bind(Persister.class).to(PersisterDbImpl.class);
         } else if ("file".equalsIgnoreCase(persister)) {
             bind(Persister.class).to(PersisterFileImpl.class);
