@@ -14,8 +14,8 @@ import static org.jooq.generated.tables.File.FILE;
 
 public class PersisterDbImpl implements Persister, AutoCloseable {
 
-    private Connection connection;
-    private DSLContext dslContext;
+    private final Connection connection;
+    private final DSLContext dslContext;
 
     @Inject
     public PersisterDbImpl(Connection connection, SQLDialect sqlDialect) {

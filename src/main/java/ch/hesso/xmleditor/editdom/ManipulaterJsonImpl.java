@@ -8,13 +8,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ManipulaterJsonImpl implements Manipulater {
-    private final Persister persister;
+    private Persister persister;
     private JsonElement element;
     private String idDocument;
+
+    //Obligatoir pour l'introspection, afin de determiner le type
+    public ManipulaterJsonImpl() { }
 
     @Inject
     public ManipulaterJsonImpl(Persister persister) {
         this.persister = persister;
+    }
+
+    @Override
+    public String forType() {
+        return ManipulaterType.JSON.getName();
     }
 
     @Override

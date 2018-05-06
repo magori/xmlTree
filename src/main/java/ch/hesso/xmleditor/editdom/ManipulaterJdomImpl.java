@@ -16,9 +16,12 @@ import java.util.stream.Collectors;
 
 public class ManipulaterJdomImpl implements Manipulater {
 
-    private final Persister persister;
+    private Persister persister;
     private Document document;
     private String idDocument;
+
+    //Obligatoir pour l'introspection, afin de determiner le type
+    public ManipulaterJdomImpl() {}
 
     @Inject
     public ManipulaterJdomImpl(Persister persister) {
@@ -28,6 +31,11 @@ public class ManipulaterJdomImpl implements Manipulater {
     public void load(String idDocument) {
         this.idDocument = idDocument;
         document = this.parse(this.persister.load(idDocument));
+    }
+
+    @Override
+    public String forType() {
+        return ManipulaterType.XML.getName();
     }
 
     @Override

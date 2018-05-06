@@ -14,8 +14,8 @@ class MapperImplTest {
 
     @Test
     void createTree() {
-        Map<ManipulaterType, Manipulater> map = new HashMap<>();
-        map.put(ManipulaterType.XML, new ManipulaterJdomImpl(new PersisterFileImpl()));
+        Map<String, Manipulater> map = new HashMap<>();
+        map.put(ManipulaterType.XML.getName(), new ManipulaterJdomImpl(new PersisterFileImpl()));
         MapperImpl treeMapping = new MapperImpl(new ManipulaterFactoryImpl(map) {});
         NodeImpl node = treeMapping.createTree("src/test/resources/exemple.xml");
         Assertions.assertThat(node.getChildren().size()).isEqualTo(2);
@@ -26,7 +26,7 @@ class MapperImplTest {
 
     @Test
     void resolveType() {
-        Assertions.assertThat(treeMapping.resolveType("totot.json")).isEqualTo(ManipulaterType.JSON);
-        Assertions.assertThat(treeMapping.resolveType("tot.otot.totot.json")).isEqualTo(ManipulaterType.JSON);
+        Assertions.assertThat(treeMapping.resolveType("totot.json")).isEqualTo(ManipulaterType.JSON.getName());
+        Assertions.assertThat(treeMapping.resolveType("tot.otot.totot.json")).isEqualTo(ManipulaterType.JSON.getName());
     }
 }

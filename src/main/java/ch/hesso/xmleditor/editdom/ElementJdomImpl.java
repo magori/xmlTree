@@ -3,6 +3,7 @@ package ch.hesso.xmleditor.editdom;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class ElementJdomImpl implements Element {
 
     private final org.jdom2.Element jdomElemnt;

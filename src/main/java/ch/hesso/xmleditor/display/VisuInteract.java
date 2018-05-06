@@ -39,8 +39,8 @@ public class VisuInteract {
     private static void displayException(Thread t, Throwable ex) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Exception Dialog");
-        alert.setHeaderText("Look, an Exception Dialog");
-        alert.setContentText("Could not find file blabla.txt!");
+        alert.setHeaderText("A exception append :(");
+        alert.setContentText(ex.getMessage());
 
 // Create expandable Exception.
         StringWriter sw = new StringWriter();

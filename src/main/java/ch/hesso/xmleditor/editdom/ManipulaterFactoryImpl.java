@@ -6,15 +6,19 @@ import java.util.Map;
 
 @Singleton
 public class ManipulaterFactoryImpl implements ManipulaterFactory {
-    private Map<ManipulaterType, Manipulater> manipulaters;
+    private final Map<String, Manipulater> manipulaters;
 
     @Inject
-    public ManipulaterFactoryImpl(Map<ManipulaterType, Manipulater> manipulaters) {
+    public ManipulaterFactoryImpl(Map<String, Manipulater> manipulaters) {
         this.manipulaters = manipulaters;
     }
 
     @Override
-    public Manipulater getManipulater(ManipulaterType manipulaterType) {
-        return this.manipulaters.get(manipulaterType);
+    public Manipulater getManipulater(String manipulaterType) {
+        Manipulater manipulater = this.manipulaters.get(manipulaterType);
+        if (manipulater == null) {
+            throw new RuntimeException("No manipulater is implemented for the type:  '" + manipulaterType + "'");
+        }
+        return manipulater;
     }
 }

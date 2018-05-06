@@ -7,7 +7,7 @@ public enum ManipulaterType {
     JSON("json"),
     XML("xml");
 
-    private String name;
+    private final String name;
 
     ManipulaterType(String name) {
         this.name = name;

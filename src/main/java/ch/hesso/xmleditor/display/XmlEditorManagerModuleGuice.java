@@ -11,60 +11,72 @@ import com.google.inject.multibindings.MapBinder;
 import org.jooq.SQLDialect;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+
 
 class XmlEditorManagerModuleGuice extends AbstractModule {
 
-
     @Override
     protected void configure() {
+
+        ServiceLoader service = ServiceLoader.load(ManipulaterFactory.class, Mapper.class, Persister.class, Manipulater.class);
+
+        addBindingForExtentionFile(service);
+
+        bind(ManipulaterFactory.class).to(service.getFirstOrDefault(ManipulaterFactory.class, ManipulaterFactoryImpl.class));
+        bind(Mapper.class).to(service.getFirstOrDefault(Mapper.class, MapperImpl.class));
+
         Properties properties = loadConfig();
+        Class<? extends Persister> persisterClass = resolvePersisterAndBindConfigForPersisterIfNeed(properties);
 
-        MapBinder<ManipulaterType, Manipulater> mapBinder = MapBinder.newMapBinder(binder(), ManipulaterType.class, Manipulater.class);
-        mapBinder.addBinding(ManipulaterType.JSON).to(ManipulaterJsonImpl.class);
-        mapBinder.addBinding(ManipulaterType.XML).to(ManipulaterJdomImpl.class);
+        bind(Persister.class).to(service.getFirstOrDefault(Persister.class, persisterClass));
+    }
 
-        bind(ManipulaterFactory.class).to(ManipulaterFactoryImpl.class);
-        bind(Mapper.class).to(MapperImpl.class);
+    private void addBindingForExtentionFile(ServiceLoader service) {
+        MapBinder<String, Manipulater> mapBinder = MapBinder.newMapBinder(binder(), String.class, Manipulater.class);
+
+        List<? super Manipulater> list = new ArrayList<>();
+        list.add(new ManipulaterJsonImpl());
+        list.add(new ManipulaterJdomImpl());
+        service.apply(Manipulater.class, list,
+                      (Manipulater m) -> mapBinder.addBinding(m.forType()).to(m.getClass()), m1 -> m1.forType().toLowerCase());
+    }
+
+    private Class<? extends Persister> resolvePersisterAndBindConfigForPersisterIfNeed(Properties properties) {
         String persister = properties.getProperty("persister");
+        Class<? extends Persister> persisterClass = PersisterFileImpl.class;
         if ("db".equalsIgnoreCase(persister)) {
             String url = properties.getProperty("jdbc.url");
             String user = properties.getProperty("jdbc.user");
             String password = properties.getProperty("jdbc.password");
             String dialect = properties.getProperty("sql.dialect");
-            bind(Connection.class).toInstance(this.createConnextion(url, user, password));
+            bind(Connection.class).toInstance(this.createConnection(url, user, password));
             bind(SQLDialect.class).toInstance(SQLDialect.valueOf(dialect));
-            bind(Persister.class).to(PersisterDbImpl.class);
+            persisterClass = PersisterDbImpl.class;
         } else if ("file".equalsIgnoreCase(persister)) {
-            bind(Persister.class).to(PersisterFileImpl.class);
-        } else {
-            bind(Persister.class).to(PersisterFileImpl.class);
+            persisterClass = PersisterFileImpl.class;
         }
+        return persisterClass;
     }
 
     private Properties loadConfig() {
-
-
-        Properties defaultProps = new Properties();
-        try {
-            FileInputStream in = new FileInputStream("./config.properties");
-            defaultProps.load(in);
-            // create application properties with default
-            Properties applicationProps = new Properties(defaultProps);
+        try (FileInputStream in = new FileInputStream("./config.properties")) {
+            Properties applicationProps = new Properties();
             applicationProps.load(in);
-            System.out.println(applicationProps.getProperty("persister"));
-            in.close();
-        } catch (Exception e) {
-            System.err.println(e);
+            return applicationProps;
+        } catch (IOException e) {
+            throw new RuntimeException("Le fichier de configuration('config.properties') n'a pas été trouvé, il faut le rajouter dans le même " +
+                                               "dossier que le jar !", e);
         }
-
-        return defaultProps;
     }
 
-    private Connection createConnextion(String url, String userName, String password) {
+    private Connection createConnection(String url, String userName, String password) {
         try {
             Connection connection = DriverManager.getConnection(url, userName, password);
             connection.setAutoCommit(true);

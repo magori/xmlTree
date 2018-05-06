@@ -6,6 +6,11 @@ package ch.hesso.xmleditor.editdom;
  */
 public interface Manipulater {
     /**
+     * Définit le type d'extention que le manipulatuer peut manier.
+     */
+    String forType();
+
+    /**
      * Retoure le noeud root de notre document.
      */
     Element getRootElement();

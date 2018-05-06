@@ -2,6 +2,7 @@ package ch.hesso.xmleditor.map;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public interface Node {
     /**
      * Permet d'avoir l'identifiant du noeud.

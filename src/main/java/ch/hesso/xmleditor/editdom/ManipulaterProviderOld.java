@@ -10,8 +10,8 @@ class ManipulaterProviderOld implements Provider<Manipulater> {
 
     @Inject
     private Injector injector;
-    private Manipulater manipulaterJson;
-    private Manipulater manipulaterXml;
+    private final Manipulater manipulaterJson;
+    private final Manipulater manipulaterXml;
     private ManipulaterType mapperType;
 
     @Inject
