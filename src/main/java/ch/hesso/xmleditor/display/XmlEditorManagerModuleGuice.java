@@ -8,6 +8,7 @@ import ch.hesso.xmleditor.persistence.PersisterDbImpl;
 import ch.hesso.xmleditor.persistence.PersisterFileImpl;
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.MapBinder;
+import com.google.inject.name.Names;
 import org.jooq.SQLDialect;
 
 import java.io.FileInputStream;
@@ -17,9 +18,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
-
+/**
+ * Le but de cette class est de
+ */
 class XmlEditorManagerModuleGuice extends AbstractModule {
 
     @Override
@@ -49,9 +53,10 @@ class XmlEditorManagerModuleGuice extends AbstractModule {
     }
 
     private Class<? extends Persister> resolvePersisterAndBindConfigForPersisterIfNeed(Properties properties) {
-        String persister = properties.getProperty("persister");
+        PropertiePersisterType persisterType = resolvePropertiePersister(properties);
+        bind(PropertiePersisterType.class).annotatedWith(Names.named(PropertiePersisterType.getKey())).toInstance(persisterType);
         Class<? extends Persister> persisterClass = PersisterFileImpl.class;
-        if ("db".equalsIgnoreCase(persister)) {
+        if (persisterType.isDb()) {
             String url = properties.getProperty("jdbc.url");
             String user = properties.getProperty("jdbc.user");
             String password = properties.getProperty("jdbc.password");
@@ -59,10 +64,19 @@ class XmlEditorManagerModuleGuice extends AbstractModule {
             bind(Connection.class).toInstance(this.createConnection(url, user, password));
             bind(SQLDialect.class).toInstance(SQLDialect.valueOf(dialect));
             persisterClass = PersisterDbImpl.class;
-        } else if ("file".equalsIgnoreCase(persister)) {
+        } else if (persisterType.isFile()) {
             persisterClass = PersisterFileImpl.class;
         }
         return persisterClass;
+    }
+
+    private PropertiePersisterType resolvePropertiePersister(Properties properties) {
+        String persister = properties.getProperty(PropertiePersisterType.getKey());
+        PropertiePersisterType persisterType = PropertiePersisterType.FILE;
+        if (!Objects.isNull(persister)) {
+            persisterType = PropertiePersisterType.valueOf(persister.toUpperCase());
+        }
+        return persisterType;
     }
 
     private Properties loadConfig() {

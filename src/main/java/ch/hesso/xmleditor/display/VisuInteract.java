@@ -15,6 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -26,6 +27,9 @@ public class VisuInteract {
     @Inject
     private Mapper mapper;
 
+    @Inject
+    @Named("persister")
+    private PropertiePersisterType propertiePersisterType;
     private Node node;
 
     // GUI components
