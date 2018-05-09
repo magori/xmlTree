@@ -22,7 +22,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 /**
- * Le but de cette class est de
+ * Le but de cette class est de gérer l'injection de dépendance et aussi de charger les plugins via le serviceLoader de java.
  */
 class XmlEditorManagerModuleGuice extends AbstractModule {
 
