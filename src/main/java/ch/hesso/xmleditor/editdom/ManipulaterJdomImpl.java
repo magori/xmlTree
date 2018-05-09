@@ -34,6 +34,11 @@ public class ManipulaterJdomImpl implements Manipulater {
     }
 
     @Override
+    public List<String> fetchDbList() {
+        return persister.fetchDbList();
+    }
+
+    @Override
     public String forType() {
         return ManipulaterType.XML.getName();
     }

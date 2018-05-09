@@ -2,6 +2,7 @@ package ch.hesso.xmleditor.editdom;
 
 import ch.hesso.xmleditor.persistence.Persister;
 import com.google.gson.*;
+import java.util.List;
 
 import javax.inject.Inject;
 import java.util.HashMap;
@@ -59,6 +60,11 @@ public class ManipulaterJsonImpl implements Manipulater {
     public void load(String idDocument) {
         this.idDocument = idDocument;
         this.parse(this.persister.load(idDocument));
+    }
+
+    @Override
+    public List<String> fetchDbList() {
+        return persister.fetchDbList();
     }
 
     void parse(String json) {

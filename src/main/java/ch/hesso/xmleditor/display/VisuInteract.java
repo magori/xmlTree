@@ -19,6 +19,8 @@ import javax.inject.Named;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings({"ALL", "unchecked"})
 public class VisuInteract {
@@ -37,6 +39,7 @@ public class VisuInteract {
     private MenuBar menuBar;
     private MenuItem menuLoad;
     private MenuItem menuClose;
+    private List<MenuItem> dbFiles;
     private TreeTableView<Node> treeTable;
     private VBox root;
 
@@ -82,10 +85,20 @@ public class VisuInteract {
         Menu menu = new Menu("File");
         menuLoad = new MenuItem("Load");
         menuClose = new MenuItem("Close");
+        if(propertiePersisterType.isDb()) {
+            this.dbFiles = new ArrayList<>();
+            for(String elem : mapper.fetchDbList()) {
+                MenuItem mi = new MenuItem(elem);
+                this.dbFiles.add(mi);
+                menu.getItems().add(mi);
+            }
+        } else {
+            menu.getItems().addAll(menuLoad, menuClose);
+        }
 
         addEvents();
 
-        menu.getItems().addAll(menuLoad, menuClose);
+
         menuBar.getMenus().addAll(menu);
 
         // Create a TreeTableView with model
@@ -113,34 +126,48 @@ public class VisuInteract {
      */
     private void addEvents() {
 
-        menuLoad.setOnAction(new EventHandler<ActionEvent>() {
+        if(propertiePersisterType.isDb()) {
+            for(MenuItem mi : this.dbFiles) {
+                mi.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        load(mi.getText().split("__")[1]);
+                        createTableTree();
+                    }
+                });
+            }
+        }
 
-            @Override
-            public void handle(ActionEvent arg0) {
-                FileChooser fileChooser = new FileChooser();
-                fileChooser.setTitle("Open XML file");
+        if(propertiePersisterType.isFile()) {
+            menuLoad.setOnAction(new EventHandler<ActionEvent>() {
 
-                // Set user working directory as default directory
-                String workingDir = System.getProperty("user.dir");
-                File defaultDirectory = new File(workingDir);
-                fileChooser.setInitialDirectory(defaultDirectory);
+                @Override
+                public void handle(ActionEvent arg0) {
+                    FileChooser fileChooser = new FileChooser();
+                    fileChooser.setTitle("Open XML file");
 
-                File file = fileChooser.showOpenDialog(primStage);
-                if (file != null) {
-                    load(file.getAbsolutePath());
-                    createTableTree();
+                    // Set user working directory as default directory
+                    String workingDir = System.getProperty("user.dir");
+                    File defaultDirectory = new File(workingDir);
+                    fileChooser.setInitialDirectory(defaultDirectory);
+
+                    File file = fileChooser.showOpenDialog(primStage);
+                    if (file != null) {
+                        load(file.getAbsolutePath());
+                        createTableTree();
+                    }
                 }
-            }
-        });
+            });
 
-        menuClose.setOnAction(new EventHandler<ActionEvent>() {
+            menuClose.setOnAction(new EventHandler<ActionEvent>() {
 
-            @Override
-            public void handle(ActionEvent arg0) {
-                TreeItem<Node> rootNode = new TreeItem(node);
-                treeTable.setRoot(rootNode);
-            }
-        });
+                @Override
+                public void handle(ActionEvent arg0) {
+                    TreeItem<Node> rootNode = new TreeItem(node);
+                    treeTable.setRoot(rootNode);
+                }
+            });
+        }
     }
 
     /**

@@ -1,6 +1,8 @@
 package ch.hesso.xmleditor.editdom;
 
 
+import java.util.List;
+
 /**
  * Permet de manipuler le document;
  */
@@ -34,6 +36,13 @@ public interface Manipulater {
      * @param idDocument Peut représenter le chemin de notre fichier.
      */
     void load(String idDocument);
+
+    /**
+     * Fetch in db the list of existinng documennts
+     *
+     * @return List of string
+     */
+    List<String> fetchDbList();
 
 
 }
