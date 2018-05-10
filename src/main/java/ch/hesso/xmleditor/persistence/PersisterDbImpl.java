@@ -1,5 +1,6 @@
 package ch.hesso.xmleditor.persistence;
 
+import java.util.List;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.generated.tables.File;
@@ -9,6 +10,7 @@ import org.jooq.impl.DSL;
 import javax.inject.Inject;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static org.jooq.generated.tables.File.FILE;
 
@@ -48,6 +50,15 @@ public class PersisterDbImpl implements Persister, AutoCloseable {
             return null;
         }
         return fileRecord.getContent();
+    }
+
+    @Override
+    public List<String> fetchDbList() {
+        List<Integer> ids = dslContext.fetch(FILE).getValues(FILE.ID);
+        List<String> names =  dslContext.fetch(FILE).getValues(FILE.DOC_NAME);
+        for(int i=0; i < names.size(); i++)
+            names.set(i, String.format("%o__%s", ids.get(i), names.get(i)));
+        return names;
     }
 
 

@@ -1,5 +1,7 @@
 package ch.hesso.xmleditor.map;
 
+import java.util.List;
+
 /**
  * Permet de faire le mapping des elements(nods).
  */
@@ -26,4 +28,11 @@ public interface Mapper {
      * @return L'arbre.
      */
     Node createTree(String idDocument);
+
+    /**
+     * Fetch in db the list of existinng documennts
+     *
+     * @return List of string
+     */
+    List<String> fetchDbList();
 }

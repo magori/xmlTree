@@ -2,7 +2,11 @@ package ch.hesso.xmleditor.map;
 
 import ch.hesso.xmleditor.editdom.Element;
 import ch.hesso.xmleditor.editdom.Manipulater;
+import ch.hesso.xmleditor.editdom.ManipulaterBridge;
 import ch.hesso.xmleditor.editdom.ManipulaterFactory;
+import ch.hesso.xmleditor.persistence.PersisterDbImpl;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -32,6 +36,11 @@ public class MapperImpl implements Mapper {
         this.manipulater.load(idDocument);
         NodeImpl node = new NodeImpl(null, manipulater.getRootElement().getName(), null);
         return this.createTree(this.manipulater.getRootElement(), null, node);
+    }
+
+    @Override
+    public List<String> fetchDbList() {
+        return this.manipulaterFactory.getManipulater(this.resolveType("null.xml")).fetchDbList();
     }
 
     String resolveType(String idDocument) {

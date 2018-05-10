@@ -1,5 +1,7 @@
 package ch.hesso.xmleditor.persistence;
 
+import java.util.List;
+
 /**
  * Pour gérer la persistances des fichiers xml
  */
@@ -20,4 +22,11 @@ public interface Persister {
      * @return Le contenue du fichier chargé.
      */
     String load(String id);
+
+    /**
+     * Fetch in db the list of existinng documennts
+     *
+     * @return List of string
+     */
+    List<String> fetchDbList();
 }

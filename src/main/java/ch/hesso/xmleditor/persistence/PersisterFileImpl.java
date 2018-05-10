@@ -1,6 +1,8 @@
 package ch.hesso.xmleditor.persistence;
 
 
+import java.util.List;
+
 import javax.inject.Singleton;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,5 +28,10 @@ public class PersisterFileImpl implements Persister {
         } catch (IOException e) {
             throw new RuntimeException("Unable to load file: " + fileName, e);
         }
+    }
+
+    @Override
+    public List<String> fetchDbList() {
+        return null;
     }
 }
