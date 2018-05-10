@@ -11,35 +11,24 @@ import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 @SuppressWarnings({"ALL", "unchecked"})
 public class VisuInteract {
-
-
     @Inject
     private Mapper mapper;
 
-    @Inject
-    @Named("persister")
-    private PropertiePersisterType propertiePersisterType;
     private Node node;
 
     // GUI components
     private Stage primStage;
     private MenuBar menuBar;
-    private MenuItem menuLoad;
     private MenuItem menuClose;
-    private List<MenuItem> dbFiles;
+
     private TreeTableView<Node> treeTable;
     private VBox root;
 
@@ -77,29 +66,16 @@ public class VisuInteract {
         alert.showAndWait();
     }
 
-    public void createGUI(Stage stage) {
+    public void createGUI(Stage stage, Menu menu) {
         Thread.setDefaultUncaughtExceptionHandler(VisuInteract::displayException);
-
         primStage = stage;
-        menuBar = new MenuBar();
-        Menu menu = new Menu("File");
-        menuLoad = new MenuItem("Load");
         menuClose = new MenuItem("Close");
-        if(propertiePersisterType.isDb()) {
-            this.dbFiles = new ArrayList<>();
-            for(String elem : mapper.fetchDbList()) {
-                MenuItem mi = new MenuItem(elem);
-                this.dbFiles.add(mi);
-                menu.getItems().add(mi);
-            }
-        } else {
-            menu.getItems().addAll(menuLoad, menuClose);
-        }
-
-        addEvents();
-
+        menu.getItems().add(menuClose);
+        menuBar = new MenuBar();
 
         menuBar.getMenus().addAll(menu);
+
+        addEvents();
 
         // Create a TreeTableView with model
         TreeItem<Node> rootNode = new TreeItem<Node>(node);
@@ -121,53 +97,8 @@ public class VisuInteract {
         primStage.show();
     }
 
-    /**
-     * Add event to the two menu buttons (load file and close file)
-     */
-    private void addEvents() {
-
-        if(propertiePersisterType.isDb()) {
-            for(MenuItem mi : this.dbFiles) {
-                mi.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        load(mi.getText().split("__")[1]);
-                        createTableTree();
-                    }
-                });
-            }
-        }
-
-        if(propertiePersisterType.isFile()) {
-            menuLoad.setOnAction(new EventHandler<ActionEvent>() {
-
-                @Override
-                public void handle(ActionEvent arg0) {
-                    FileChooser fileChooser = new FileChooser();
-                    fileChooser.setTitle("Open XML file");
-
-                    // Set user working directory as default directory
-                    String workingDir = System.getProperty("user.dir");
-                    File defaultDirectory = new File(workingDir);
-                    fileChooser.setInitialDirectory(defaultDirectory);
-
-                    File file = fileChooser.showOpenDialog(primStage);
-                    if (file != null) {
-                        load(file.getAbsolutePath());
-                        createTableTree();
-                    }
-                }
-            });
-
-            menuClose.setOnAction(new EventHandler<ActionEvent>() {
-
-                @Override
-                public void handle(ActionEvent arg0) {
-                    TreeItem<Node> rootNode = new TreeItem(node);
-                    treeTable.setRoot(rootNode);
-                }
-            });
-        }
+    protected Stage getPrimStage() {
+        return primStage;
     }
 
     /**
@@ -175,14 +106,14 @@ public class VisuInteract {
      *
      * @param idDocument: filepath of the document
      */
-    private void load(String idDocument) {
+    protected void load(String idDocument) {
         this.node = this.mapper.createTree(idDocument);
     }
 
     /**
      * Create the visual representation of the xml file
      */
-    private void createTableTree() {
+    protected void createTableTree() {
 
         TreeItem<Node> rootNode = createTree(node, new TreeItem(node));
         treeTable.setRoot(rootNode);
@@ -217,7 +148,19 @@ public class VisuInteract {
 
         treeTable.setShowRoot(false);
         treeTable.setEditable(true);
+    }
 
+    /**
+     * Add event to the two menu buttons (load file and close file)
+     */
+    private void addEvents() {
+        menuClose.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent arg0) {
+                TreeItem<Node> rootNode = new TreeItem(node);
+                treeTable.setRoot(rootNode);
+            }
+        });
     }
 
     /**

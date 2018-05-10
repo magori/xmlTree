@@ -1,0 +1,8 @@
+{
+  "brand": "Toyota",
+  "doors": 5,
+  "options": {
+    "automatic": "TRUE",
+    "gps": "google"
+  }
+}

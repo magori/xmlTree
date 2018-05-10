@@ -8,7 +8,6 @@ import ch.hesso.xmleditor.persistence.PersisterDbImpl;
 import ch.hesso.xmleditor.persistence.PersisterFileImpl;
 import com.google.inject.AbstractModule;
 import com.google.inject.multibindings.MapBinder;
-import com.google.inject.name.Names;
 import org.jooq.SQLDialect;
 
 import java.io.FileInputStream;
@@ -28,18 +27,22 @@ class XmlEditorManagerModuleGuice extends AbstractModule {
 
     @Override
     protected void configure() {
-
         ServiceLoader service = ServiceLoader.load(ManipulaterFactory.class, Mapper.class, Persister.class, Manipulater.class);
-
         addBindingForExtentionFile(service);
 
         bind(ManipulaterFactory.class).to(service.getFirstOrDefault(ManipulaterFactory.class, ManipulaterFactoryImpl.class));
         bind(Mapper.class).to(service.getFirstOrDefault(Mapper.class, MapperImpl.class));
 
         Properties properties = loadConfig();
-        Class<? extends Persister> persisterClass = resolvePersisterAndBindConfigForPersisterIfNeed(properties);
-
-        bind(Persister.class).to(service.getFirstOrDefault(Persister.class, persisterClass));
+        PropertiePersisterType persisterType = resolvePropertiePersister(properties);
+        if (persisterType.isDb()) {
+            bindConfigForPersister(properties);
+            bind(View.class).to(service.getFirstOrDefault(View.class, ViewDbImpl.class));
+            bind(Persister.class).to(service.getFirstOrDefault(Persister.class, PersisterDbImpl.class));
+        } else if (persisterType.isFile()) {
+            bind(View.class).to(service.getFirstOrDefault(View.class, ViewFileImpl.class));
+            bind(Persister.class).to(service.getFirstOrDefault(Persister.class, PersisterFileImpl.class));
+        }
     }
 
     private void addBindingForExtentionFile(ServiceLoader service) {
@@ -52,22 +55,13 @@ class XmlEditorManagerModuleGuice extends AbstractModule {
                       (Manipulater m) -> mapBinder.addBinding(m.forType()).to(m.getClass()), m1 -> m1.forType().toLowerCase());
     }
 
-    private Class<? extends Persister> resolvePersisterAndBindConfigForPersisterIfNeed(Properties properties) {
-        PropertiePersisterType persisterType = resolvePropertiePersister(properties);
-        bind(PropertiePersisterType.class).annotatedWith(Names.named(PropertiePersisterType.getKey())).toInstance(persisterType);
-        Class<? extends Persister> persisterClass = PersisterFileImpl.class;
-        if (persisterType.isDb()) {
-            String url = properties.getProperty("jdbc.url");
-            String user = properties.getProperty("jdbc.user");
-            String password = properties.getProperty("jdbc.password");
-            String dialect = properties.getProperty("sql.dialect");
-            bind(Connection.class).toInstance(this.createConnection(url, user, password));
-            bind(SQLDialect.class).toInstance(SQLDialect.valueOf(dialect));
-            persisterClass = PersisterDbImpl.class;
-        } else if (persisterType.isFile()) {
-            persisterClass = PersisterFileImpl.class;
-        }
-        return persisterClass;
+    private void bindConfigForPersister(Properties properties) {
+        String url = properties.getProperty("jdbc.url");
+        String user = properties.getProperty("jdbc.user");
+        String password = properties.getProperty("jdbc.password");
+        String dialect = properties.getProperty("sql.dialect");
+        bind(Connection.class).toInstance(this.createConnection(url, user, password));
+        bind(SQLDialect.class).toInstance(SQLDialect.valueOf(dialect));
     }
 
     private PropertiePersisterType resolvePropertiePersister(Properties properties) {
