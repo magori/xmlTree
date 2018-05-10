@@ -1,5 +1,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/magori/xmlTree/badge.svg?branch=master)](https://coveralls.io/github/magori/xmlTree?branch=master)
 [![Build Status](https://travis-ci.org/magori/xmlTree.svg?branch=master)](https://travis-ci.org/magori/xmlTree)
+[![BCH compliance](https://bettercodehub.com/edge/badge/magori/xmlTree?branch=master)](https://bettercodehub.com/)
+[![Known Vulnerabilities](https://snyk.io/test/github/magori/xmlTree/badge.svg)](https://snyk.io/test/github/magori/xmlTree)
 ## XMLEditor
 
 XMLEditor is an app that allows you to open XML files and to edit them. The edit action is currently limited. You can only change the text of an XML element.
