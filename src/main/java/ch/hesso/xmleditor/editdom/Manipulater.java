@@ -26,6 +26,23 @@ public interface Manipulater {
     Element editElement(String id, String newText);
 
     /**
+     * @param id      L'identifiant du noeud.
+     * @param newName Le nouveau name du noeud.
+     *
+     * @return L'element modifié.
+     */
+    Element editElementName(String id, String newName);
+
+    /**
+     *
+     * @param parentId
+     * @param name
+     * @param text
+     * @return
+     */
+    String addElementToParent(String parentId, String name, String text);
+
+    /**
      * Sauvegarde le document chargé en mémoiore.
      */
     void saveDocument();

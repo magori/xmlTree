@@ -18,12 +18,22 @@ public class ElementSaxImpl implements Element{
         children = new ArrayList<>();
     }
 
+    public ElementSaxImpl(String name, String text) {
+        this.name = name;
+        this.text = text;
+        children = new ArrayList<>();
+    }
+
     public void addChild(ElementSaxImpl element){
         children.add(element);
     }
 
     public void setText(String text){
         this.text = text;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     @Override

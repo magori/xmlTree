@@ -63,6 +63,21 @@ public class ManipulaterSaxImpl implements Manipulater {
         return element;
     }
 
+    @Override
+    public Element editElementName(String id, String newName) {
+        ElementSaxImpl element = this.findElement(id);
+        element.setName(newName);
+        return element;
+    }
+
+    @Override
+    public String addElementToParent(String parentId, String name, String text) {
+        ElementSaxImpl parent = this.findElement(parentId);
+        int newChildID = parent.getChildren().size();
+        parent.getChildren().add(new ElementSaxImpl(name, text));
+        return parentId + "-" + newChildID;
+    }
+
     public void saveDocument() {
         String content = createXMLStructure(rootElementSaxImpl);
         try{
@@ -77,7 +92,6 @@ public class ManipulaterSaxImpl implements Manipulater {
             Writer outxml = new StringWriter();
             XMLSerializer serializer = new XMLSerializer(outxml, format);
             serializer.serialize(doc);
-            System.out.println(outxml.toString());
 
             this.persister.save(this.idDocument, outxml.toString());
         } catch (ParserConfigurationException e) {

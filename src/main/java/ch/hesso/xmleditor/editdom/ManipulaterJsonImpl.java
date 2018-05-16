@@ -2,6 +2,7 @@ package ch.hesso.xmleditor.editdom;
 
 import ch.hesso.xmleditor.persistence.Persister;
 import com.google.gson.*;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,7 +15,8 @@ public class ManipulaterJsonImpl implements Manipulater {
     private String idDocument;
 
     //Obligatoir pour l'introspection, afin de determiner le type
-    public ManipulaterJsonImpl() { }
+    public ManipulaterJsonImpl() {
+    }
 
     @Inject
     public ManipulaterJsonImpl(Persister persister) {
@@ -42,6 +44,16 @@ public class ManipulaterJsonImpl implements Manipulater {
         String property = resolveProperty(ids[ids.length - 1], jsonObject);
         jsonObject.addProperty(property, newText);
         return new ElementJsonImpl(jsonObject.get(property));
+    }
+
+    @Override
+    public Element editElementName(String id, String newName) {
+       return null;
+    }
+
+    @Override
+    public String addElementToParent(String parentId, String name, String text) {
+        return "";
     }
 
     private String resolveProperty(String id, JsonObject jsonObject) {

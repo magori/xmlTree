@@ -12,6 +12,10 @@ public class MapperImpl implements Mapper {
     private final ManipulaterFactory manipulaterFactory;
     private Manipulater manipulater;
 
+    private static final String NEW_NODE_NAME = "name";
+    private static final String NEW_NODE_TEXT = "text";
+
+
     @Inject
     public MapperImpl(ManipulaterFactory manipulaterFactory) {
         this.manipulaterFactory = manipulaterFactory;
@@ -20,6 +24,16 @@ public class MapperImpl implements Mapper {
     @Override
     public void editNode(String id, String newText) {
         this.manipulater.editElement(id, newText);
+    }
+
+    @Override
+    public void editNodeName(String id, String newName){ this.manipulater.editElementName(id, newName); }
+
+    @Override
+    public Node addNodeToParent(String parentId){
+        String childID = this.manipulater.addElementToParent(parentId, NEW_NODE_NAME, NEW_NODE_TEXT);
+        Node newNode = new NodeImpl(childID, NEW_NODE_NAME, NEW_NODE_TEXT);
+        return newNode;
     }
 
     @Override

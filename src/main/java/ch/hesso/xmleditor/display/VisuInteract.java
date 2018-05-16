@@ -83,6 +83,25 @@ public class VisuInteract {
         treeTable.setPrefWidth(600);
         treeTable.setPrefHeight(500);
 
+        // instantiate the root context menu
+        ContextMenu rootContextMenu = ContextMenuBuilder.create().items(
+                MenuItemBuilder.create()
+                        .text("Add Child to Element")
+                        .onAction(
+                                new EventHandler<ActionEvent>() {
+                                    @Override
+                                    public void handle(ActionEvent arg0) {
+                                        String currentNodeID = treeTable.getSelectionModel().getSelectedItem().getValue().getId();
+                                        TreeItem<Node> currentNode = treeTable.getSelectionModel().getSelectedItem();
+                                        Node child = mapper.addNodeToParent(currentNodeID);
+                                        currentNode.getChildren().add(new TreeItem(child));
+                                    }
+                                }
+                        ).build()
+        ).build();
+
+        treeTable.setContextMenu(rootContextMenu);
+
         root = new VBox();
         root.getChildren().add(menuBar);
         root.getChildren().add(treeTable);
@@ -122,7 +141,17 @@ public class VisuInteract {
         TreeTableColumn<Node, String> nodeName = new TreeTableColumn<>(
                 "Node Name");
         nodeName.setCellValueFactory(new TreeItemPropertyValueFactory<>("name"));
+        nodeName.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
         nodeName.setPrefWidth(250);
+        nodeName.setOnEditCommit((
+                TreeTableColumn.CellEditEvent<Node, String> event) -> {
+            final Node item = event.getRowValue().getValue();
+            System.out.println("Change Item " + item + " from "
+                    + event.getOldValue() + " to new value "
+                    + event.getNewValue());
+            mapper.editNodeName(item.getId(), event.getNewValue());
+            mapper.saveTree();
+        });
         treeTable.getColumns().add(nodeName);
 
         TreeTableColumn<Node, String> nodeText = new TreeTableColumn<>(
@@ -131,11 +160,11 @@ public class VisuInteract {
         nodeText.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
         nodeText.setPrefWidth(300);
         nodeText.setOnEditCommit((
-                                         TreeTableColumn.CellEditEvent<Node, String> event) -> {
+                TreeTableColumn.CellEditEvent<Node, String> event) -> {
             final Node item = event.getRowValue().getValue();
             System.out.println("Change Item " + item + " from "
-                                       + event.getOldValue() + " to new value "
-                                       + event.getNewValue());
+                    + event.getOldValue() + " to new value "
+                    + event.getNewValue());
             mapper.editNode(item.getId(), event.getNewValue());
             mapper.saveTree();
         });
