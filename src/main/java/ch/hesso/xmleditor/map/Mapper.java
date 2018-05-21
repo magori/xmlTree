@@ -15,19 +15,15 @@ public interface Mapper {
      */
     void editNode(String id, String newText);
 
-    /**
-     * Permet l'édition du nom de l'élément de notre noeud.
-     *
-     * @param id      Identifiant du noeud.
-     * @param newName Le nouveau text du noeud.
-     */
-    void editNodeName(String id, String newName);
 
     /**
      * Permet de rajouter un nouveau noeud à l'arbre
+     * @param parentId Identifiant du noeud parent du nouveau noeud
+     * @param newNodeName Nom du nouveau noeud
+     * @param newNodeValue Valeur du nouveau noeud
      * @return Node object
      */
-    Node addNodeToParent(String parentId);
+    Node addNodeToParent(String parentId, String newNodeName, String newNodeValue);
 
     /**
      * Sauvegarde notre document;

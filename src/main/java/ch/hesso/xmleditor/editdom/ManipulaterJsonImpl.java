@@ -2,6 +2,8 @@ package ch.hesso.xmleditor.editdom;
 
 import ch.hesso.xmleditor.persistence.Persister;
 import com.google.gson.*;
+import org.jooq.tools.json.JSONObject;
+import org.jooq.util.derby.sys.Sys;
 
 import java.util.List;
 
@@ -41,19 +43,73 @@ public class ManipulaterJsonImpl implements Manipulater {
             String property = resolveProperty(ids[i], jsonObject);
             jsonObject = jsonObject.get(property).getAsJsonObject();
         }
+
         String property = resolveProperty(ids[ids.length - 1], jsonObject);
+        System.out.println("[ManipulaterJsonImpl] " + property + "/" + jsonObject.get(property).getAsString());
         jsonObject.addProperty(property, newText);
         return new ElementJsonImpl(jsonObject.get(property));
     }
 
-    @Override
+    /*@Override
     public Element editElementName(String id, String newName) {
-       return null;
-    }
+        String[] ids = id.split("-");
+        JsonObject jsonObject = element.getAsJsonObject();
+        for (int i = 0; i < (ids.length - 1); i++) {
+            String property = resolveProperty(ids[i], jsonObject);
+            jsonObject = jsonObject.get(property).getAsJsonObject();
+        }
+
+        String oldProperty = resolveProperty(ids[ids.length - 1], jsonObject);
+        JsonElement el = jsonObject.get(oldProperty);
+        jsonObject.remove(oldProperty);
+        jsonObject.add(newName, el);
+        return new ElementJsonImpl(jsonObject.get(newName));
+    }*/
 
     @Override
     public String addElementToParent(String parentId, String name, String text) {
-        return "";
+        String[] ids = parentId.split("-");
+
+        // Look for right element and his parent
+        ElementJsonImpl elJSON = new ElementJsonImpl(element);
+        ElementJsonImpl elJSONParent = new ElementJsonImpl(element);
+        for (int i = 0; i < ids.length; i++) {
+            elJSON = (ElementJsonImpl) elJSON.getChildren().get(Integer.valueOf(ids[i]));
+            if(i < ids.length - 1){
+                elJSONParent = elJSON;
+            }
+        }
+
+        if(elJSON.element.isJsonObject()){
+            elJSON.addProperty(name, text);
+            return parentId + "-" + (elJSON.getChildren().size() - 1);
+        }else{
+            // new JSON Element
+            String nameProperty = elJSON.getName();
+            JsonObject newObject = new JsonObject();
+            newObject.addProperty(name, text);
+
+            // Remove all children
+            JsonObject elementParent = elJSONParent.element.getAsJsonObject();
+            JsonObject elementParentCopy = elementParent.deepCopy();
+            for(String property: elementParentCopy.keySet()){
+                elementParent.remove(property);
+            }
+
+            // Add all children again to respect the order
+            for(String property: elementParentCopy.keySet()) {
+                if (property.equals(nameProperty)) {
+                    elementParent.add(nameProperty, newObject);
+                } else {
+                    if (elementParentCopy.get(property).isJsonPrimitive())
+                        elementParent.addProperty(property, elementParentCopy.get(property).getAsString());
+                    else
+                        elementParent.add(property, elementParentCopy.get(property).getAsJsonObject());
+                }
+            }
+            return parentId + "-" + 0; // always 0 since it is the first child of a previous property
+        }
+
     }
 
     private String resolveProperty(String id, JsonObject jsonObject) {

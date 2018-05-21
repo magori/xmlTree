@@ -64,13 +64,6 @@ public class ManipulaterSaxImpl implements Manipulater {
     }
 
     @Override
-    public Element editElementName(String id, String newName) {
-        ElementSaxImpl element = this.findElement(id);
-        element.setName(newName);
-        return element;
-    }
-
-    @Override
     public String addElementToParent(String parentId, String name, String text) {
         ElementSaxImpl parent = this.findElement(parentId);
         int newChildID = parent.getChildren().size();

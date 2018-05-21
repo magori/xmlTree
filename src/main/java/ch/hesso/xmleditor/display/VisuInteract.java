@@ -12,10 +12,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import javax.inject.Inject;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Optional;
 
 @SuppressWarnings({"ALL", "unchecked"})
 public class VisuInteract {
@@ -91,10 +93,8 @@ public class VisuInteract {
                                 new EventHandler<ActionEvent>() {
                                     @Override
                                     public void handle(ActionEvent arg0) {
-                                        String currentNodeID = treeTable.getSelectionModel().getSelectedItem().getValue().getId();
-                                        TreeItem<Node> currentNode = treeTable.getSelectionModel().getSelectedItem();
-                                        Node child = mapper.addNodeToParent(currentNodeID);
-                                        currentNode.getChildren().add(new TreeItem(child));
+                                        askDataForNewElement();
+
                                     }
                                 }
                         ).build()
@@ -141,17 +141,7 @@ public class VisuInteract {
         TreeTableColumn<Node, String> nodeName = new TreeTableColumn<>(
                 "Node Name");
         nodeName.setCellValueFactory(new TreeItemPropertyValueFactory<>("name"));
-        nodeName.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
         nodeName.setPrefWidth(250);
-        nodeName.setOnEditCommit((
-                TreeTableColumn.CellEditEvent<Node, String> event) -> {
-            final Node item = event.getRowValue().getValue();
-            System.out.println("Change Item " + item + " from "
-                    + event.getOldValue() + " to new value "
-                    + event.getNewValue());
-            mapper.editNodeName(item.getId(), event.getNewValue());
-            mapper.saveTree();
-        });
         treeTable.getColumns().add(nodeName);
 
         TreeTableColumn<Node, String> nodeText = new TreeTableColumn<>(
@@ -209,5 +199,49 @@ public class VisuInteract {
             }
         }
         return parent;
+    }
+
+    private void askDataForNewElement(){
+        Dialog<String[]> dialog = new Dialog();
+        dialog.setTitle("New Element to selected child");
+        dialog.setHeaderText("Enter the node name and the node value of the new element.");
+        dialog.setResizable(true);
+
+        Label label1 = new Label("Name: ");
+        Label label2 = new Label("Value: ");
+        TextField text1 = new TextField();
+        TextField text2 = new TextField();
+
+        GridPane grid = new GridPane();
+        grid.add(label1, 1, 1);
+        grid.add(text1, 2, 1);
+        grid.add(label2, 1, 2);
+        grid.add(text2, 2, 2);
+        dialog.getDialogPane().setContent(grid);
+
+        ButtonType buttonTypeOk = new ButtonType("Okay", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
+
+        dialog.setResultConverter(new Callback<ButtonType, String[]>() {
+            @Override
+            public String[] call(ButtonType b) {
+                if (b == buttonTypeOk) {
+                    return new String[]{text1.getText(), text2.getText() };
+                }
+                return null;
+            }
+        });
+
+        Optional<String[]> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            String[] newElementValue = result.get();
+            if(newElementValue != null && newElementValue[0] != null && newElementValue[0].length() > 0 && newElementValue[1].length() > 0){
+                String currentNodeID = treeTable.getSelectionModel().getSelectedItem().getValue().getId();
+                TreeItem<Node> currentNode = treeTable.getSelectionModel().getSelectedItem();
+                Node child = mapper.addNodeToParent(currentNodeID, newElementValue[0], newElementValue[1]);
+                currentNode.getChildren().add(new TreeItem(child));
+                mapper.saveTree();
+            }
+        }
     }
 }

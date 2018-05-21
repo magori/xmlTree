@@ -25,13 +25,6 @@ public interface Manipulater {
      */
     Element editElement(String id, String newText);
 
-    /**
-     * @param id      L'identifiant du noeud.
-     * @param newName Le nouveau name du noeud.
-     *
-     * @return L'element modifié.
-     */
-    Element editElementName(String id, String newName);
 
     /**
      *

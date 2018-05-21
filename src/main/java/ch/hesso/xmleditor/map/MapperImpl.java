@@ -27,12 +27,9 @@ public class MapperImpl implements Mapper {
     }
 
     @Override
-    public void editNodeName(String id, String newName){ this.manipulater.editElementName(id, newName); }
-
-    @Override
-    public Node addNodeToParent(String parentId){
-        String childID = this.manipulater.addElementToParent(parentId, NEW_NODE_NAME, NEW_NODE_TEXT);
-        Node newNode = new NodeImpl(childID, NEW_NODE_NAME, NEW_NODE_TEXT);
+    public Node addNodeToParent(String parentId, String newNodeName, String newNodeValue){
+        String childID = this.manipulater.addElementToParent(parentId, newNodeName, newNodeValue);
+        Node newNode = new NodeImpl(childID, newNodeName, newNodeValue);
         return newNode;
     }
 

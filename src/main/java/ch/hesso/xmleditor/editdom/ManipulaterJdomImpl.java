@@ -55,18 +55,14 @@ public class ManipulaterJdomImpl implements Manipulater {
         return new ElementJdomImpl(element);
     }
 
-    @Override
-    public Element editElementName(String id, String newName) {
-        org.jdom2.Element element = this.findElement(id);
-        element.setName(newName);
-        return new ElementJdomImpl(element);
-    }
 
     public String addElementToParent(String parentId, String name, String text){
         org.jdom2.Element parent = this.findElement(parentId);
 
         int newChildID = parent.getChildren().size();
-        parent.getChildren().add(new org.jdom2.Element(name, text));
+        org.jdom2.Element newElement = new org.jdom2.Element(name);
+        newElement.setText(text);
+        parent.getChildren().add(newElement);
         return parentId + "-" + newChildID;
 
     }
