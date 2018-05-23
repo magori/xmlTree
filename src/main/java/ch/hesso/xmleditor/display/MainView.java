@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 
 import javax.inject.Inject;
 
-public class MainVeiw {
+public class MainView {
     @Inject
     private View view;
 

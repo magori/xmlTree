@@ -19,8 +19,8 @@ public class XmlEditor extends Application {
     public void start(Stage stage) {
         try {
             final Injector injector = Guice.createInjector(new XmlEditorManagerModuleGuice());
-            final MainVeiw MainVeiw = injector.getInstance(MainVeiw.class);
-            MainVeiw.createGUI(stage);
+            final MainView MainView = injector.getInstance(MainView.class);
+            MainView.createGUI(stage);
         } catch (Exception e) {
             LOG.error("Error: {}", e);
             System.exit(0);
