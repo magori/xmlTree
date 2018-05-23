@@ -2,7 +2,6 @@ package ch.hesso.xmleditor.display;
 
 enum PropertiePersisterType {
     DB, FILE;
-
     public static String getKey() {
         return "persister";
     }

@@ -49,7 +49,6 @@ class XmlEditorManagerModuleGuice extends AbstractModule {
         MapBinder<String, Manipulater> mapBinder = MapBinder.newMapBinder(binder(), String.class, Manipulater.class);
 
         List<? super Manipulater> list = new ArrayList<>();
-        list.add(new ManipulaterJsonImpl());
         list.add(new ManipulaterJdomImpl());
         service.apply(Manipulater.class, list,
                       (Manipulater m) -> mapBinder.addBinding(m.forType()).to(m.getClass()), m1 -> m1.forType().toLowerCase());
